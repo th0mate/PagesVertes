@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>{% block page_title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <h1>Base</h1>
+</header>
+
+<div id="flashes-container">
+
+    {% for message in app.flashes('success') %}
+        <span class="flashes flashes-success">{{ message }}</span>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <span class="flashes flashes-error">{{ message }}</span>
+    {% endfor %}
+
+</div>
+
+{% block page_content %}
+{% endblock %}
+
+</body>
+</html>
