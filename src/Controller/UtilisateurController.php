@@ -16,7 +16,7 @@ use App\Repository\PublicationRepository;
 class UtilisateurController extends AbstractController
 {
 
-    #[Route('/', name: 'pages_rouges')]
+    #[Route('/', name: 'pages_vertes', methods: ['GET', 'POST'])]
     public function pagesRouges(Request $request): Response
     {
         $this->addFlash('success', 'ceci est un test');

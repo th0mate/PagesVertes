@@ -4,6 +4,7 @@
     <title>{% block page_title %}{% endblock %}</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
 </head>
 <body>
 
@@ -40,14 +41,60 @@
 </div>
 
 
+<div class="separator">
 
-<header>
-    <h1>Base</h1>
-</header>
+    <div class="bandeau">
+
+        <img src="{{ asset('img/logo.png') }}" alt="">
+
+        <div class="wrapElements">
+
+            <a class="element" href="{{ path('pages_vertes') }}">
+                <img src="{{ asset('img/accueil.png') }}" alt="">
+                <p>Accueil</p>
+            </a>
+
+            <a class="element" href="{{ path('credits') }}">
+                <img src="{{ asset('img/credits.png') }}" alt="">
+                <p>Crédits</p>
+            </a>
+
+            {% if is_granted('ROLE_USER') %}
+                <a class="element">
+                    <img src="{{ asset('img/utilisateur.png') }}" alt="">
+                    <p>Mon profil</p>
+                </a>
+            {% endif %}
+
+        </div>
+
+        <div class="actionsUtilisateur">
+            {% if not is_granted('ROLE_USER') %}
+                <a class="element">
+                    <img src="{{ asset('img/utilisateur.png') }}" alt="">
+                    <p>Connexion</p>
+                </a>
+                <a class="element">
+                    <img src="{{ asset('img/inscription.png') }}" alt="">
+                    <p>Inscription</p>
+                </a>
+            {% else %}
+                <a class="element">
+                    <img src="{{ asset('img/se-deconnecter.png') }}" alt="">
+                    <p>Déconnexion</p>
+                </a>
+            {% endif %}
+        </div>
 
 
-{% block page_content %}
-{% endblock %}
+    </div>
+
+    <div class="other">
+        {% block page_content %}
+        {% endblock %}
+    </div>
+
+</div>
 
 </body>
 </html>
