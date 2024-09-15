@@ -3,25 +3,48 @@
 <head>
     <title>{% block page_title %}{% endblock %}</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
 </head>
 <body>
+
+<div class="flash" id="flash">
+
+    {% for message in app.flashes('success') %}
+        <div class='alert alert-success'>
+            <img src='{{ asset("img/success.png") }}' alt='icone'>
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('warning') %}
+        <div class='alert alert-warning'>
+            <img src='{{ asset("img/warning.png") }}' alt='icone'>
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class='alert alert-danger'>
+            <img src='{{ asset("img/danger.png") }}' alt='icone'>
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('info') %}
+        <div class='alert alert-info'>
+            <img src='{{ asset("img/info.png") }}' alt='icone'>
+            <p>{{ message }}</p>
+        </div>
+    {% endfor %}
+
+</div>
+
+
 
 <header>
     <h1>Base</h1>
 </header>
 
-<div id="flashes-container">
-
-    {% for message in app.flashes('success') %}
-        <span class="flashes flashes-success">{{ message }}</span>
-    {% endfor %}
-
-    {% for message in app.flashes('error') %}
-        <span class="flashes flashes-error">{{ message }}</span>
-    {% endfor %}
-
-</div>
 
 {% block page_content %}
 {% endblock %}

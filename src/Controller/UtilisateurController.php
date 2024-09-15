@@ -19,6 +19,7 @@ class UtilisateurController extends AbstractController
     #[Route('/', name: 'pages_rouges')]
     public function pagesRouges(Request $request): Response
     {
+        $this->addFlash('success', 'ceci est un test');
         return $this->render('utilisateurs/accueil.html.twig');
     }
 }

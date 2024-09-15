@@ -1,0 +1,93 @@
+
+/**
+------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------- MESSAGES FLASH -----------------------------------------------------------
+ */
+
+.flash {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    min-height: 45px;
+    margin-right: 2%;
+    z-index: 15;
+    position: fixed;
+    top: 30px;
+    right: 50%;
+    transform: translateX(50%);
+    animation:flashes-animation 5s 1;
+    -webkit-animation:flashes-animation 5s 1;
+    animation-fill-mode: forwards;
+    animation-delay:3s;
+    -webkit-animation-delay:1s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.alert {
+    padding: 2%;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    z-index: 0;
+}
+
+.alert > p {
+    margin-left: 5%;
+    line-height: 1em;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.alert > img {
+    width: 10%;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-info {
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+
+.alert-warning {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border-color: #faebcc;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+
+@-webkit-keyframes flashes-animation {
+    0%   {opacity: 1;}
+    50% {opacity: 1;}
+    90% {opacity: 0;}
+    100% {opacity: 0;}
+}
+
+
+
+/**
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------ NAVBAR ----------------------------------------------------------------
+ */
+
+
+
