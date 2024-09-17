@@ -12,6 +12,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_LOGIN', fields: ['login'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['adresseEmail'])]
+#[UniqueEntity(fields: ['login'], message: 'Ce login est déjà utilisé!')]
+#[UniqueEntity(fields: ['adresseEmail'], message: 'Cette adresse email est déjà utilisée!')]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -41,7 +44,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotNull]
     #[Assert\NotBlank]
     #[Assert\Email (message: 'L\'adresse mail n\'est pas valide')]
-    private ?string $adresseMail = null;
+    private ?string $adresseEmail = null;
 
     #[ORM\Column]
     private ?int $code = null;
@@ -124,14 +127,14 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getAdresseMail(): ?string
+    public function getAdresseEmail(): ?string
     {
-        return $this->adresseMail;
+        return $this->adresseEmail;
     }
 
-    public function setAdresseMail(string $adresseMail): static
+    public function setAdresseEmail(string $adresseEmail): static
     {
-        $this->adresseMail = $adresseMail;
+        $this->adresseEmail = $adresseEmail;
 
         return $this;
     }

@@ -11,8 +11,6 @@ class UtilisateurManager implements UtilisateurManagerInterface
 {
 
     public function __construct(
-        #[Autowire('%dossier_photo_profil%')]
-        private string                      $dossierPhotoProfil,
         private UserPasswordHasherInterface $userPasswordHasherInterface
     )
     {
@@ -27,24 +25,11 @@ class UtilisateurManager implements UtilisateurManagerInterface
     }
 
     /**
-     * Sauvegarde l'image de profil dans le dossier de destination puis affecte son nom au champ correspondant dans la classe de l'utilisateur
-     */
-    private function sauvegarderPhotoProfil(Utilisateur $utilisateur, ?UploadedFile $fichierPhotoProfil): void
-    {
-        if ($fichierPhotoProfil != null) {
-            $fileName = $utilisateur->getLogin() . '.' . $fichierPhotoProfil->guessExtension();
-            $fichierPhotoProfil->move($this->dossierPhotoProfil, $fileName);
-            $utilisateur->setNomPhotoProfil($fileName);
-        }
-    }
-
-    /**
      * Réalise toutes les opérations nécessaires avant l'enregistrement en base d'un nouvel utilisateur, après soumissions du formulaire (hachage du mot de passe, sauvegarde de la photo de profil...)
      */
-    public function processNewUtilisateur(Utilisateur $utilisateur, ?string $plainPassword, ?UploadedFile $fichierPhotoProfil): void
+    public function processNewUtilisateur(Utilisateur $utilisateur, ?string $plainPassword): void
     {
         $this->chiffrerMotDePasse($utilisateur, $plainPassword);
-        $this->sauvegarderPhotoProfil($utilisateur, $fichierPhotoProfil);
     }
 
 }
