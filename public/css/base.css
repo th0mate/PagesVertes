@@ -146,6 +146,19 @@ nav {
         border-bottom-right-radius: 10px;
         border-top-right-radius: 10px;
 
+        a {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            img {
+                width: 95%;
+            }
+
+        }
+
         img:not(.close) {
             width: 90%;
             padding-top: 30px;
@@ -170,7 +183,7 @@ nav {
 
         .element {
             text-decoration: none;
-            width: 95%;
+            width: 85%;
             min-height: 30px;
             border-radius: 10px;
             display: flex;
@@ -184,14 +197,14 @@ nav {
             color: black;
 
             img {
-                width: 35px;
+                width: 20px;
                 padding: 0;
             }
 
             p {
                 margin: 0;
                 padding-left: 20px;
-                font-size: 20px;
+                font-size: 1em;
             }
         }
 
@@ -279,15 +292,6 @@ nav {
         transition: background-color 0.5s ease-in-out;
         padding: 10px;
 
-        .close {
-            display: block;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 20px;
-            height: 20px;
-        }
-
 
         span {
             border-radius: 5px;
@@ -315,12 +319,31 @@ nav {
             position: fixed;
             top: 0;
             right: 0;
-            min-width: 350px;
+            min-width: 250px;
             max-width: 100%;
             height: 100vh;
             background-color: white;
             border-radius: 0;
             z-index: 10;
+
+
+            .close {
+                display: none;
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                width: 25px;
+                height: 25px;
+                cursor: pointer;
+                padding: 5px;
+                border-radius: 3px;
+                transition: background-color 0.5s ease-in-out;
+            }
+
+            .close:hover {
+                background-color: var(--vert);
+            }
+
         }
 
         .other {

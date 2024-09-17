@@ -55,9 +55,11 @@
 
     <div class="bandeau">
 
-        <img class="close" src="{{ asset('img/x.png') }}" alt="">
+        <img class="close" src="{{ asset('img/x.png') }}" alt="" onclick="cacherMenu()">
 
-        <img src="{{ asset('img/logo.png') }}" alt="">
+        <a class="logo" href="{{ path('pages_vertes') }}">
+            <img src="{{ asset('img/logo.png') }}" alt="">
+        </a>
 
         <div class="wrapElements">
 
