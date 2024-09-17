@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class FlashMessageHelper implements FlashMessageHelperInterface, FlashMessageHelperInterface
+class FlashMessageHelper implements FlashMessageHelperInterface
 {
 
     public function __construct(private RequestStack $requestStack)
