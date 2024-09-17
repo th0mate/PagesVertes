@@ -50,18 +50,18 @@
 
         <div class="wrapElements">
 
-            <a class="element" href="{{ path('pages_vertes') }}">
+            <a class="element{% if page_actuelle == 'Accueil' %} active {% endif %}" href="{{ path('pages_vertes') }}">
                 <img src="{{ asset('img/accueil.png') }}" alt="">
                 <p>Accueil</p>
             </a>
 
-            <a class="element" href="{{ path('credits') }}">
+            <a class="element {% if page_actuelle == 'Credits' %} active {% endif %}" href="{{ path('credits') }}">
                 <img src="{{ asset('img/credits.png') }}" alt="">
                 <p>Crédits</p>
             </a>
 
             {% if is_granted('ROLE_USER') %}
-                <a class="element">
+                <a class="element {% if page_actuelle == 'Profil' %} active {% endif %}">
                     <img src="{{ asset('img/utilisateur.png') }}" alt="">
                     <p>Mon profil</p>
                 </a>
@@ -71,16 +71,16 @@
 
         <div class="actionsUtilisateur">
             {% if not is_granted('ROLE_USER') %}
-                <a class="element">
+                <a class="element{% if page_actuelle == 'Connexion' %} active {% endif %}" >
                     <img src="{{ asset('img/utilisateur.png') }}" alt="">
                     <p>Connexion</p>
                 </a>
-                <a class="element">
+                <a class="element {% if page_actuelle == 'Inscription' %} active {% endif %}">
                     <img src="{{ asset('img/inscription.png') }}" alt="">
                     <p>Inscription</p>
                 </a>
             {% else %}
-                <a class="element">
+                <a class="element{% if page_actuelle == 'Deconnexion' %} active {% endif %}">
                     <img src="{{ asset('img/se-deconnecter.png') }}" alt="">
                     <p>Déconnexion</p>
                 </a>
