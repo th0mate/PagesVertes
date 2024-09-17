@@ -47,7 +47,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $adresseEmail = null;
 
     #[ORM\Column]
-    private ?int $code = null;
+    private ?string $code = null;
 
     #[ORM\Column(options: ["default" => false])]
     private ?bool $estVisible = null;
@@ -139,12 +139,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCode(): ?int
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(int $code): static
+    public function setCode(string $code): static
     {
         $this->code = $code;
 

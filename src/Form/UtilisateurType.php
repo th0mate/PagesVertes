@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Utilisateur;
+use SebastianBergmann\CodeCoverage\Report\Text;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -30,8 +31,19 @@ class UtilisateurType extends AbstractType
                 ]])
             ->add('inscription', SubmitType::class)
             ->add('adresseEmail', EmailType::class)
-            ->add('code', IntegerType::class)
-            ->add('estVisible', CheckboxType::class)
+            ->add('code', TextType::class, [
+                'attr' => [
+                    'minlength' => 6,
+                    'maxlength' => 200
+                ],
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^[a-zA-Z0-9]+$/',
+                        'message' => 'Le code ne doit contenir que des lettres et des chiffres'
+                    ])
+                ]])
+            ->add('estVisible', CheckboxType::class,[
+                'required' => false])
             ->add('plainPassword', PasswordType::class, [
                 "mapped" => false,
                 "constraints" => [

@@ -33,9 +33,11 @@
             {{ form_label(formInscription.code) }}
             {{ form_widget(formInscription.code) }}
 
+        </div>
+        <div>
             {{ form_label(formInscription.estVisible) }}
             {{ form_widget(formInscription.estVisible) }}
-
+            <input type="submit" value="Générer"  />
         </div>
         <!-- Affichage du bouton d'envoi, contenant le texte (label) "S'inscrire" -->
         {{ form_widget(formInscription.inscription, {'label':'S\'inscrire', 'attr': {'class': 'basic-form-submit'}}) }}
