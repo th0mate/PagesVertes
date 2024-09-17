@@ -4,6 +4,7 @@
     <title>{% block page_title %}{% endblock %}</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
+    {% block cssSupplementaire %}{% endblock %}
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
 </head>
 <body>
