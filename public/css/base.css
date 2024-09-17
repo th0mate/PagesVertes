@@ -164,6 +164,7 @@ nav {
         justify-content: space-between;
         align-items: center;
         position: sticky;
+        top: 0;
         border-bottom-right-radius: 10px;
         border-top-right-radius: 10px;
 
@@ -275,6 +276,7 @@ nav {
             justify-content: flex-start;
             align-items: flex-start;
             align-content: flex-start;
+            padding-bottom: 20px;
         }
     }
 
@@ -573,6 +575,15 @@ nav {
         background-color: #111;
         color: white;
     }
+}
+
+
+@media (max-width: 500px) {
+
+    .bandeau {
+        width: 100%!important;
+    }
+
 }
 
 
