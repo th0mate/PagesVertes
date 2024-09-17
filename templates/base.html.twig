@@ -6,7 +6,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
     {% block cssSupplementaire %}{% endblock %}
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+    <script type="text/javascript" src="{{ asset('js/visuels.js') }}" defer></script>
+    {% block jsSupplementaire %}{% endblock %}
 </head>
+
+<nav onclick="afficherMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</nav>
+
 <body>
 
 <div class="flash" id="flash">
@@ -46,6 +55,8 @@
 
     <div class="bandeau">
 
+        <img class="close" src="{{ asset('img/x.png') }}" alt="">
+
         <img src="{{ asset('img/logo.png') }}" alt="">
 
         <div class="wrapElements">
@@ -76,7 +87,7 @@
 
         <div class="actionsUtilisateur">
             {% if not is_granted('ROLE_USER') %}
-                <a class="element{% if page_actuelle == 'Connexion' %} active {% endif %}" >
+                <a class="element{% if page_actuelle == 'Connexion' %} active {% endif %}">
                     <img src="{{ asset('img/profil.png') }}" alt="">
                     <p>Connexion</p>
                 </a>
