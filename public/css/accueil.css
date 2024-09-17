@@ -28,12 +28,12 @@
 }
 
 .gridAccueil {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: center;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     align-content: center;
-    padding-top: 15px;
+    padding-top: 30px;
+    max-width: 95%;
 
     .gridItem {
         display: flex;
@@ -44,11 +44,11 @@
         padding: 10px;
         border-radius: 10px;
         border: 1px solid black;
-        width: 90%;
-        height: 90%;
+        width: 47%;
+        min-height: 140px;
 
         img {
-            width: 60px;
+            width: 80px;
             padding: 10px;
             border-radius: 5px;
             background-color: #363636;
@@ -57,7 +57,7 @@
         div {
             display: flex;
             flex-direction: column;
-            padding: 10px;
+            padding-left: 20px;
 
             h3 {
                 margin: 0;
@@ -71,7 +71,8 @@
 
 
             .bouton {
-                max-height: 10px;
+                margin-top: 20px;
+                max-height: 20px;
             }
         }
 
