@@ -55,6 +55,11 @@
                 <p>Accueil</p>
             </a>
 
+            <a class="element{% if page_actuelle == 'Search' %} active {% endif %}" href="{{ path('pages_vertes') }}">
+                <img src="{{ asset('img/utilisateur.png') }}" alt="">
+                <p>Parcourir</p>
+            </a>
+
             <a class="element {% if page_actuelle == 'Credits' %} active {% endif %}" href="{{ path('credits') }}">
                 <img src="{{ asset('img/credits.png') }}" alt="">
                 <p>Crédits</p>
@@ -72,7 +77,7 @@
         <div class="actionsUtilisateur">
             {% if not is_granted('ROLE_USER') %}
                 <a class="element{% if page_actuelle == 'Connexion' %} active {% endif %}" >
-                    <img src="{{ asset('img/utilisateur.png') }}" alt="">
+                    <img src="{{ asset('img/profil.png') }}" alt="">
                     <p>Connexion</p>
                 </a>
                 <a class="element {% if page_actuelle == 'Inscription' %} active {% endif %}">
