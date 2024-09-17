@@ -1,0 +1,97 @@
+.welcome {
+    margin: 0;
+}
+
+.light {
+    font-weight: 300;
+}
+
+.presentationMain {
+
+    width: 95%;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+
+    .illu {
+        width: 300px;
+        padding-left: 10px;
+    }
+
+    div {
+        padding: 10px;
+    }
+
+}
+
+.gridAccueil {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding-top: 15px;
+
+    .gridItem {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        align-content: center;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        width: 90%;
+        height: 90%;
+
+        img {
+            width: 60px;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #363636;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+
+            h3 {
+                margin: 0;
+            }
+
+            p {
+                margin: 0;
+                font-size: 0.9em;
+                padding-top: 5px;
+            }
+
+
+            .bouton {
+                max-height: 10px;
+            }
+        }
+
+    }
+
+}
+
+
+/**
+------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------- DARK MODE ---------------------------------------------------------
+ */
+.dark {
+
+    .presentationMain {
+        border: 1px solid white;
+    }
+
+    .gridItem {
+        border: 1px solid white;
+    }
+
+}
