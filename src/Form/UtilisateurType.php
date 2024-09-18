@@ -42,7 +42,7 @@ class UtilisateurType extends AbstractType
                 'constraints' => [
                     new Regex([
                         'pattern' => '/^[a-zA-Z0-9]+$/',
-                        'message' => 'Le code ne doit contenir que des lettres et des chiffres'
+                        'message' => 'Le code ne doit contenir que des caractères alphanumériques.'
                     ])
                 ]])
             ->add('estVisible', CheckboxType::class, [
@@ -52,13 +52,13 @@ class UtilisateurType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 "mapped" => false,
                 "constraints" => [
-                    new NotBlank(['message' => 'Veuillez saisir un mot de passe']),
-                    new NotNull(['message' => 'Veuillez saisir un mot de passe']),
-                    new Length(['min' => 8, 'max' => 30, 'minMessage' => 'Le mot de passe doit contenir entre 8 et 30 caractères',
-                        'maxMessage' => 'Le mot de passe doit contenir entre 8 et 30 caractères']),
+                    new NotBlank(['message' => 'Veuillez saisir un mot de passe.']),
+                    new NotNull(['message' => 'Veuillez saisir un mot de passe.']),
+                    new Length(['min' => 8, 'max' => 30, 'minMessage' => 'Le mot de passe doit contenir entre 8 et 30 caractères.',
+                        'maxMessage' => 'Le mot de passe doit contenir entre 8 et 30 caractères.']),
                     new regex([
                         'pattern' => '#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,30}$#',
-                        'message' => 'Le mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule et un chiffre'
+                        'message' => 'Le mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule et un chiffre.'
                     ]),
                 ],
                 'attr' => [

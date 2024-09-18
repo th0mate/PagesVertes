@@ -19,12 +19,13 @@ class UtilisateurController extends AbstractController
 
     public function __construct(
         private UtilisateurManagerInterface $utilisateurManagerInterface,
-        private EntityManagerInterface $entityManager,
+        private EntityManagerInterface      $entityManager,
         private FlashMessageHelperInterface $flashMessageHelperInterface,
-        private UtilisateurRepository $utilisateurRepository
+        private UtilisateurRepository       $utilisateurRepository
 
     )
-    {}
+    {
+    }
 
     #[Route('/', name: 'pages_vertes', methods: ['GET', 'POST'])]
     public function pagesRouges(Request $request): Response
@@ -43,7 +44,7 @@ class UtilisateurController extends AbstractController
     public function inscription(Request $request, EntityManagerInterface $entityManager): Response
     {
 
-        if($this->isGranted('ROLE_USER')) {
+        if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('pages_vertes');
         }
 
@@ -51,7 +52,8 @@ class UtilisateurController extends AbstractController
         $form = $this->createForm(UtilisateurType::class, $inscription, [
             'method' => 'POST',
             'action' => $this->generateURL('inscription')
-        ]);        $form->handleRequest($request);
+        ]);
+        $form->handleRequest($request);
         $this->flashMessageHelperInterface->addFormErrorsAsFlash($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -59,7 +61,7 @@ class UtilisateurController extends AbstractController
             $this->utilisateurManagerInterface->processNewUtilisateur($utilisateur, $form->get('plainPassword')->getData());
             $entityManager->persist($utilisateur);
             $entityManager->flush();
-            $this->addFlash('success', 'Inscription réussie : bienvenue sur Pages Vertes !');
+            $this->addFlash('success', 'Profil inscrit avec succès !');
             return $this->redirectToRoute('pages_vertes');
         }
 

@@ -79,11 +79,10 @@ nav {
     justify-content: center;
     align-items: center;
     width: 350px;
-    min-height: 45px;
     margin-right: 2%;
     z-index: 15;
     position: fixed;
-    top: 30px;
+    top: 60px;
     right: 50%;
     transform: translateX(50%);
     animation: flashes-animation 5s 1;
@@ -113,6 +112,8 @@ nav {
     line-height: 1em;
     margin-top: 1%;
     margin-bottom: 1%;
+    padding: 5px;
+    font-size: 1.1em;
 }
 
 .alert > img {
@@ -321,7 +322,7 @@ nav {
         padding: 10px;
 
         .illu {
-            width: 60%;
+            width: 200px!important;
             padding-left: 0;
         }
 
@@ -354,11 +355,11 @@ nav {
 @media (max-width: 800px) {
 
     nav {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         position: fixed;
-        top: 20px;
-        right: 0;
+        top: 70px;
+        right: 10px;
         z-index: 9;
         display: flex;
         flex-direction: column;
@@ -366,8 +367,7 @@ nav {
         align-items: center;
         align-content: center;
         background-color: var(--vert);
-        border-bottom-left-radius: 5px;
-        border-top-left-radius: 5px;
+        border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.5s ease-in-out;
         padding: 10px;
@@ -441,6 +441,27 @@ nav {
 }
 
 
+@media (max-width: 500px) {
+
+    .bandeau {
+        width: 100%!important;
+
+        .logo {
+            width: 100%!important;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+
+            img {
+                width: 60%!important;
+            }
+        }
+    }
+
+}
+
+
 /**
 ------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------- BOUTONS POUR LE THEME ------------------------------------------------------
@@ -500,12 +521,16 @@ nav {
 
 
 .switchLight {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     align-content: center;
     padding-top: 10px;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    width: 150px;
+    z-index: 9;
 }
 
 .switch_3_ways_v2 {
@@ -647,14 +672,6 @@ nav {
     }
 }
 
-
-@media (max-width: 500px) {
-
-    .bandeau {
-        width: 100%!important;
-    }
-
-}
 
 
 

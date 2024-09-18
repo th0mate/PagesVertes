@@ -59,6 +59,18 @@
 
 <div class="separator">
 
+    <div class="switchLight">
+        <div class="switch_3_ways_v2">
+            <div id="monthly2" class="switch2 monthly" onclick="change_period2('clair')"><img
+                        src="{{ asset('img/soleil.png') }}" alt=""></div>
+            <div id="semester2" class="switch2 semester" onclick="change_period2('auto')"><img
+                        src="{{ asset('img/auto.png') }}" alt=""></div>
+            <div id="annual2" class="switch2 annual" onclick="change_period2('sombre')"><img
+                        src="{{ asset('img/lune.png') }}" alt=""></div>
+            <div id="selector" class="selector"></div>
+        </div>
+    </div>
+
     <div class="bandeau">
 
         <div class="wrapLogo">
@@ -69,18 +81,6 @@
             <a class="logo" href="{{ path('pages_vertes') }}">
                 <img src="{{ asset('img/logo.png') }}" alt="">
             </a>
-
-            <div class="switchLight">
-                <div class="switch_3_ways_v2">
-                    <div id="monthly2" class="switch2 monthly" onclick="change_period2('clair')"><img
-                                src="{{ asset('img/soleil.png') }}" alt=""></div>
-                    <div id="semester2" class="switch2 semester" onclick="change_period2('auto')"><img
-                                src="{{ asset('img/auto.png') }}" alt=""></div>
-                    <div id="annual2" class="switch2 annual" onclick="change_period2('sombre')"><img
-                                src="{{ asset('img/lune.png') }}" alt=""></div>
-                    <div id="selector" class="selector"></div>
-                </div>
-            </div>
         </div>
 
         <div class="wrapElements">

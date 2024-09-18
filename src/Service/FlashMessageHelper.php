@@ -19,7 +19,7 @@ class FlashMessageHelper implements FlashMessageHelperInterface
         $errors = $form->getErrors(true);
         foreach ($errors as $error) {
             $errorMsg = $error->getMessage();
-            $this->requestStack->getCurrentRequest()->getSession()->getFlashBag()->add('error', $errorMsg);
+            $this->requestStack->getCurrentRequest()->getSession()->getFlashBag()->add('warning', $errorMsg);
         }
     }
 }
