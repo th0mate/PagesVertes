@@ -29,12 +29,15 @@ class UtilisateurType extends AbstractType
                     'minlength' => 4,
                     'maxlength' => 20
                 ]])
-            ->add('inscription', SubmitType::class)
-            ->add('adresseEmail', EmailType::class)
+            ->add('adresseEmail', EmailType::class, [
+                'attr' => [
+                    'maxlength' => 255
+                ]
+            ])
             ->add('code', TextType::class, [
                 'attr' => [
                     'minlength' => 6,
-                    'maxlength' => 200
+                    'maxlength' => 255
                 ],
                 'constraints' => [
                     new Regex([
@@ -42,7 +45,9 @@ class UtilisateurType extends AbstractType
                         'message' => 'Le code ne doit contenir que des lettres et des chiffres'
                     ])
                 ]])
-            ->add('estVisible', CheckboxType::class,[
+            ->add('estVisible', CheckboxType::class, [
+                'attr' =>[
+                'checked' => 'checked'],
                 'required' => false])
             ->add('plainPassword', PasswordType::class, [
                 "mapped" => false,
@@ -61,7 +66,8 @@ class UtilisateurType extends AbstractType
                     'maxlength' => 30,
                     'pattern' => '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,30}$',
 
-                ]]);
+                ]])
+            ->add('inscription', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
