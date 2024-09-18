@@ -32,6 +32,17 @@ nav {
     font-weight: 300;
 }
 
+::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 5px;
+    background-color: #f0f1ec;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--vert);
+    border-radius: 5px;
+}
+
 
 /**
 ------------------------------------------------------------------------------------------------------------------------
@@ -258,9 +269,9 @@ nav {
 
     .other {
         min-height: 100vh;
-        width: 75%;
+        width: 73%;
         background-color: #f0f1ec;
-        padding-left: 5%;
+        padding-left: 2%;
 
         .onglet1 {
             color: var(--vert);
@@ -549,6 +560,12 @@ nav {
 .dark {
     background-color: #111!important;
     color: #fff;
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        border-radius: 5px;
+        background-color: #111;
+    }
 
     .bandeau {
         background-color: black;
