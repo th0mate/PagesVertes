@@ -27,6 +27,7 @@ function change_period2(period) {
         selector.style.width = monthly.clientWidth + "px";
         selector.style.backgroundColor = "#4CAF50";
         selector.innerHTML = `<img src="${soleilImageURL}" alt="">`;
+        StockerCookieTheme("clair");
         document.querySelector('.dark').classList.remove('dark');
 
 
@@ -35,6 +36,7 @@ function change_period2(period) {
         selector.style.width = semester.clientWidth + "px";
         selector.innerHTML = `<img src="${autoImageURL}" alt="">`;
         selector.style.backgroundColor = "#4CAF50";
+        StockerCookieTheme("auto");
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.querySelector('html').classList.add('dark');
@@ -45,7 +47,29 @@ function change_period2(period) {
         selector.innerHTML = `<img src="${luneImageURL}" alt="">`;
         selector.style.backgroundColor = "#4CAF50";
         document.querySelector('html').classList.add('dark');
+        StockerCookieTheme("sombre");
     }
 }
 
-change_period2("auto");
+
+/**
+ * Stocke le thème choisi dans un cookie (uniquement pour une expérience utilisateur confortable)
+ */
+function StockerCookieTheme() {
+    const selector = document.getElementById("selector");
+    if (selector.style.left === "0px") {
+        document.cookie = "theme=clair; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    } else if (selector.style.left === "52px") {
+        document.cookie = "theme=auto; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    } else {
+        document.cookie = "theme=sombre; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+    }
+}
+
+
+/**
+ * Gestion de l'affichage des boutons par défaut. Utilise les cookies s'il en existe un
+ */
+if (document.cookie.includes("theme=clair")) change_period2("clair");
+else if (document.cookie.includes("theme=sombre")) change_period2("sombre");
+else change_period2("auto");
