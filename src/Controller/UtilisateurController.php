@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Publication;
-use App\Form\PublicationType;
 use App\Service\FlashMessageHelper;
 use App\Service\FlashMessageHelperInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Repository\PublicationRepository;
 
 class UtilisateurController extends AbstractController
 {
@@ -29,28 +26,10 @@ class UtilisateurController extends AbstractController
         return $this->render('credits/credits.html.twig', ['page_actuelle' => 'Credits']);
     }
 
-    #[Route('/inscription', name: 'inscription', methods: ['GET', 'POST'])]
-    public function inscription(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/utilisateurs', name: 'afficherUtilisateurs', methods: 'GET')]
+    public function afficherProfils(): Response
     {
-
-        if($this->isGranted('ROLE_USER')) {
-            return $this->redirectToRoute('feed');
-        }
-
-        $form = $this->createForm(UtilisateurType::class, new Utilisateur(), ['method' => 'POST', 'action' => $this->generateUrl('inscription')]);
-        $form->handleRequest($request);
-        $this->flashMessageHelperInterface->addFormErrorsAsFlash($form);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $utilisateur = $form->getData();
-            $this->utilisateurManagerInterface->processNewUtilisateur($utilisateur, $form->get('plainPassword')->getData(), $form->get('fichierPhotoProfil')->getData());
-            $entityManager->persist($utilisateur);
-            $entityManager->flush();
-            $this->addFlash('success', 'Inscription réussie : bienvenue sur The Feed !');
-            return $this->redirectToRoute('feed');
-        }
-
-        return $this->render('utilisateur/inscription.html.twig', ['formInscription' => $form]);
+        return $this->render('utilisateurs/listeUtilisateurs.html.twig', ['page_actuelle' => 'Parcourir']);
     }
 
 }

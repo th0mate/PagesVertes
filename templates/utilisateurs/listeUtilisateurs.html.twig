@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}
+    Pages Vertes | Utilisateurs
+{% endblock %}
+
+{% block cssSupplementaire %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/listeUtilisateurs.css') }}">{% endblock %}
+
+{% block page_content %}
+    <div class="onglet1">
+        <h1>Parcourir</h1>
+    </div>
+
+    <div class="parcourirAccueil">
+
+        <div>
+            <h2>Parcourez les profils <span class="greenText">publics</span> et recherchez des <span class="greenText">utilisateurs</span>.
+            </h2>
+            <h4 class="light">Utilisez la <span class="greenText">barre de recherche</span> pour trouver un profil parmi
+                les comptes publics et privés, et parcourez les différents profils publics.</h4>
+        </div>
+
+        <img class="illu" src="{{ asset('img/illuRechercher.png') }}" alt="">
+
+    </div>
+
+    <div class="gridListe">
+
+        <div class="utilisateur">
+
+            <h3 class="light greenText">Utilisateur 1</h3>
+            <p>Utilisateur 1 est </p>
+            <p>Utilisateur 1 est </p>
+            <p>Utilisateur 1 est </p>
+        </div>
+
+    </div>
+
+{% endblock %}

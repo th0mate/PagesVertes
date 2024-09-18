@@ -90,7 +90,7 @@
                 <p>Accueil</p>
             </a>
 
-            <a class="element{% if page_actuelle == 'Search' %} active {% endif %}" href="{{ path('pages_vertes') }}">
+            <a class="element{% if page_actuelle == 'Parcourir' %} active {% endif %}" href="{{ path('afficherUtilisateurs') }}">
                 <img src="{{ asset('img/utilisateur.png') }}" alt="">
                 <p>Parcourir</p>
             </a>
@@ -126,7 +126,6 @@
                 </a>
             {% endif %}
         </div>
-
 
     </div>
 
