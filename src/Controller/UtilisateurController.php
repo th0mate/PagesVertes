@@ -71,7 +71,11 @@ class UtilisateurController extends AbstractController
     #[Route('/utilisateurs', name: 'afficherUtilisateurs', methods: 'GET')]
     public function afficherProfils(): Response
     {
-        return $this->render('utilisateur/listeUtilisateurs.html.twig', ['page_actuelle' => 'Parcourir']);
+       // TODO : trier les utilisateurs mais par quoi ? Les plus récents ?
+
+        $utilisateursVisible = $this->utilisateurRepository->findBy(['estVisible' => true]);
+
+        return $this->render('utilisateur/listeUtilisateurs.html.twig', ['page_actuelle' => 'Parcourir', "utilisateursVisible" => $utilisateursVisible]);
     }
 
 }
