@@ -12,6 +12,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_LOGIN', fields: ['login'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['adresseEmail'])]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_CODE', fields: ['code'])]
+#[UniqueEntity(fields: ['login'], message: 'Ce login est déjà utilisé!')]
+#[UniqueEntity(fields: ['adresseEmail'], message: 'Cette adresse email est déjà utilisée!')]
+#[UniqueEntity(fields: ['code'], message: 'Ce code est déjà utilisé!')]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -34,20 +39,38 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+    #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 8, max: 30, minMessage: 'Il faut au moins 8 caractères!', maxMessage: 'Il faut au plus 30 caractères!')]
+    #[Assert\Regex(pattern:'#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,30}$#')]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull]
     #[Assert\NotBlank]
     #[Assert\Email (message: 'L\'adresse mail n\'est pas valide')]
-    private ?string $adresseMail = null;
+    private ?string $adresseEmail = null;
 
-    #[ORM\Column]
-    private ?int $code = null;
+    #[ORM\Column(length: 255)]
+    private ?string $code = null;
 
-    #[ORM\Column(options: ["default" => false])]
+    #[ORM\Column(options: ["default" => true])]
     private ?bool $estVisible = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: 'Il faut au plus 255 caractères!')]
+    private ?string $prenom = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: 'Il faut au plus 255 caractères!')]
+    private ?string $nom = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Assert\Length(min: 10, max: 10, minMessage: 'Il faut 10 caractères!', maxMessage: 'Il faut 10 caractères!')]
+    private ?int $telephone = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255, maxMessage: 'Il faut au plus 255 caractères!')]
+    private ?string $facebook = null;
 
     public function getId(): ?int
     {
@@ -124,24 +147,24 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getAdresseMail(): ?string
+    public function getAdresseEmail(): ?string
     {
-        return $this->adresseMail;
+        return $this->adresseEmail;
     }
 
-    public function setAdresseMail(string $adresseMail): static
+    public function setAdresseEmail(string $adresseEmail): static
     {
-        $this->adresseMail = $adresseMail;
+        $this->adresseEmail = $adresseEmail;
 
         return $this;
     }
 
-    public function getCode(): ?int
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(int $code): static
+    public function setCode(string $code): static
     {
         $this->code = $code;
 
@@ -156,6 +179,54 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEstVisible(bool $estVisible): static
     {
         $this->estVisible = $estVisible;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?int
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?int $telephone): static
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getFacebook(): ?string
+    {
+        return $this->facebook;
+    }
+
+    public function setFacebook(?string $facebook): static
+    {
+        $this->facebook = $facebook;
 
         return $this;
     }
