@@ -4,45 +4,72 @@
     Pages Vertes | Inscription
 {% endblock %}
 
-{% block page_content %}
-    <main>
-    {{ form_start(formInscription, {'attr': {'class': 'center basic-form'}}) }}
-    <fieldset>
-        <legend>Inscription</legend>
-        <div>
-            <!-- Affichage du label "Login" -->
-            {{ form_label(formInscription.login) }}
-            <p class="help-input-form">Entre 4 et 20 caractères</p>
-            <!-- Affichage de l'input du login -->
-            {{ form_widget(formInscription.login) }}
-        </div>
-        <div>
-            <!-- Affichage du label "Mot de passe" -->
-            {{ form_label(formInscription.plainPassword) }}
-            <p class="help-input-form">Entre 8 et 30 caractères, au moins une minuscule, une majuscule et un nombre</p>
-            <!-- Affichage de l'input du mot de passe -->
-            {{ form_widget(formInscription.plainPassword)}}
-        </div>
-        <div>
-            <!-- Affichage du label "Adresse mail" -->
-            {{ form_label(formInscription.adresseEmail)}}
-            <!-- Affichage de l'input de l'adresse email -->
-            {{ form_widget(formInscription.adresseEmail) }}
-        </div>
-        <div>
-            {{ form_label(formInscription.code) }}
-            {{ form_widget(formInscription.code) }}
+{% block cssSupplementaire %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/inscription.css') }}">{% endblock %}
 
-        </div>
+{% block page_content %}
+    <div class="onglet1">
+        <h1>Inscription</h1>
+    </div>
+
+    <div class="wrapTop">
+        <img class="illu" src="{{ asset('img/registerIllu.png') }}" alt="">
+
         <div>
-            {{ form_label(formInscription.estVisible) }}
-            {{ form_widget(formInscription.estVisible) }}
-            <input type="submit" value="Générer"  />
+            <h2>Rejoignez <span class="greenText">Pages Vertes</span>, et devenez visible auprès de nos utilisateurs !</h2>
+            <h4 class="light">Créez votre compte et devenez visible auprès de centaines d'utilisateurs !</h4>
+            <h4 class="light">Profitez d'une connexion <span class="greenText">sécurisée</span> et <span class="greenText">chiffrée</span> !</h4>
         </div>
-        <!-- Affichage du bouton d'envoi, contenant le texte (label) "S'inscrire" -->
-        {{ form_widget(formInscription.inscription, {'label':'S\'inscrire', 'attr': {'class': 'basic-form-submit'}}) }}
-    </fieldset>
+    </div>
+    {{ form_start(formInscription, {'attr': {'class': 'center basic-form'}}) }}
+    <div>
+        <div class="inputbox">
+            {{ form_widget(formInscription.login, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            {# {{ form_label(formInscription.login) }} #}
+            <label for="login">Login</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p class="help-input-form">Entre 4 et 20 caractères.</p>
+    </div>
+    <div>
+        <div class="inputbox">
+            {{ form_widget(formInscription.plainPassword, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            <label for="plainPassword">Mot de passe</label>
+            {# {{ form_label(formInscription.plainPassword) }} #}
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p class="help-input-form">Entre 8 et 30 caractères, au moins une minuscule, une majuscule et un nombre.</p>
+    </div>
+    <div>
+        <div class="inputbox">
+            {{ form_widget(formInscription.adresseEmail, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            {# {{ form_label(formInscription.adresseEmail) }} #}
+            <label for="adresseEmail">Adresse Email</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p class="help-input-form">Adresse email valide.</p>
+    </div>
+    <div>
+        <div class="inputbox">
+            {{ form_widget(formInscription.code, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            {# {{ form_label(formInscription.code) }} #}
+            <label for="code">Code personnel</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p>Code unique de 6 caractères relié à votre compte.</p>
+    </div>
+    <div class="wrapSwitch">
+        {# {{ form_label(formInscription.estVisible) }} #}
+        <label for="estVisible">Visibilité publique du profil :</label>
+        {{ form_widget(formInscription.estVisible, {'attr': {'class': 'switch'}}) }}
+    </div>
+    <div class="wrapSubmit">
+        {{ form_widget(formInscription.inscription, {'label':'S\'inscrire', 'attr': {'class': 'submit'}}) }}
+    </div>
     {{ form_rest(formInscription) }}
     {{ form_end(formInscription) }}
-</main>
 {% endblock %}

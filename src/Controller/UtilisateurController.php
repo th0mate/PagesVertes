@@ -30,7 +30,7 @@ class UtilisateurController extends AbstractController
     public function pagesRouges(Request $request): Response
     {
         //$this->addFlash('success', 'ceci est un test');
-        return $this->render('utilisateurs/accueil.html.twig', ['page_actuelle' => 'Accueil']);
+        return $this->render('utilisateur/accueil.html.twig', ['page_actuelle' => 'Accueil']);
     }
 
     #[Route('/credits', name: 'credits', methods: 'GET')]
@@ -69,7 +69,7 @@ class UtilisateurController extends AbstractController
     #[Route('/utilisateurs', name: 'afficherUtilisateurs', methods: 'GET')]
     public function afficherProfils(): Response
     {
-        return $this->render('utilisateurs/listeUtilisateurs.html.twig', ['page_actuelle' => 'Parcourir']);
+        return $this->render('utilisateur/listeUtilisateurs.html.twig', ['page_actuelle' => 'Parcourir']);
     }
 
 }

@@ -109,3 +109,21 @@
     }
 
 }
+
+
+@media (max-width: 600px) {
+
+    .gridListe {
+        grid-template-columns: repeat(auto-fill, 100%);
+        grid-gap: 10px;
+    }
+
+    .gridListe .utilisateur {
+        height: 150px;
+    }
+
+    .parcourirAccueil {
+        padding: 10px;
+    }
+
+}

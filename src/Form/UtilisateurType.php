@@ -37,7 +37,7 @@ class UtilisateurType extends AbstractType
             ->add('code', TextType::class, [
                 'attr' => [
                     'minlength' => 6,
-                    'maxlength' => 255
+                    'maxlength' => 6
                 ],
                 'constraints' => [
                     new Regex([
