@@ -3,8 +3,8 @@
         <h3 class="light greenText"> {{ utilisateur.login }}</h3>
         <!--TODO AJOUTER IF estAdmin pour qu'il voit les profils cachés ou non
          <img class="estVisible invertLight" src="{ asset('img/ferme.png') }" alt=""> -->
-        <div><img class="invertLight" src="{{ asset('img/telephone.png') }}" alt="">{{ utilisateur.telephone }}</div>
-        <div><img class="invertLight" src="{{ asset('img/mail.png') }}" alt="">{{ utilisateur.adresseEmail }}</div>
-        <div><img class="invertLight" src="{{ asset('img/facebook.png') }}" alt=""> {{ utilisateur.facebook }}</div>
+        <div><img class="invertLight" src="{{ asset('img/telephone.png') }}" alt="">{% if utilisateur.telephone != '' %} {{ utilisateur.telephone }} {% else %} Non Communiqué {% endif %}</div>
+        <div><img class="invertLight" src="{{ asset('img/mail.png') }}" alt="">{% if utilisateur.adresseEmail != '' %} {{ utilisateur.adresseEmail }} {% else %} Non Communiqué {% endif %}</div>
+        <div><img class="invertLight" src="{{ asset('img/facebook.png') }}" alt=""> {% if utilisateur.facebook != '' %} {{ utilisateur.facebook }} {% else %} Non Communiqué {% endif %}</div>
     </div>
 {% endif %}
