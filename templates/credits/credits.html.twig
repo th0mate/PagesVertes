@@ -2,10 +2,25 @@
 
 {% block page_title %}Pages Vertes | Crédits{% endblock %}
 
-{% block page_content %}
-    <h1 class="onglet">Crédits</h1>
+{% block cssSupplementaire %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/credits.css') }}">{% endblock %}
 
-    <a href="https://storyset.com/people">People illustrations by Storyset</a>
-    <a href="https://www.flaticon.com/fr/icones-gratuites/bouclier" title="bouclier icônes">Bouclier icônes créées par Freepik - Flaticon</a>
-    <a href="https://www.flaticon.com/fr/icones-gratuites/creer-un-profil" title="créer un profil icônes">Créer un profil icônes créées par Vectorsclub - Flaticon</a>
+{% block page_content %}
+    <div class="onglet1">
+        <h1>Crédits</h1>
+    </div>
+
+    <h1>Projet Web - Septembre 2024 : <span class="greenText">Pages Vertes</span></h1>
+    <h2 class="light">Thibaut HAUDOUY - Lorick VERGNES - Thomas LOYE</h2>
+    <br>
+    <h2 class="greenText">Crédits photos :</h2>
+    <h3 class="light">Toutes les illustrations proviennent de Flaticon, Freepik et Storyset.</h3>
+
+    <ul class="creditList">
+        <li><a target="_blank" href="https://storyset.com/people">People illustrations by Storyset</a></li>
+        <li><a target="_blank" href="https://www.flaticon.com/fr/icones-gratuites/bouclier" title="bouclier icônes">Bouclier icônes créées
+                par Freepik - Flaticon</a></li>
+        <li><a target="_blank" href="https://www.flaticon.com/fr/icones-gratuites/creer-un-profil" title="créer un profil icônes">Créer un
+                profil icônes créées par Vectorsclub - Flaticon</a></li>
+    </ul>
 {% endblock %}

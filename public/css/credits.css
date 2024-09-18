@@ -1,0 +1,24 @@
+
+
+.creditList {
+
+    a {
+        color: black;
+        display: block;
+        margin-bottom: 1rem;
+        transition: color 0.3s;
+        &:hover {
+            color: var(--vert);
+        }
+    }
+
+}
+
+
+.dark {
+
+    a {
+        color: white;
+    }
+
+}
