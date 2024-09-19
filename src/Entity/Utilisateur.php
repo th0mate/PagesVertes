@@ -17,6 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity(fields: ['login'], message: 'Ce login est déjà utilisé!')]
 #[UniqueEntity(fields: ['adresseEmail'], message: 'Cette adresse email est déjà utilisée!')]
 #[UniqueEntity(fields: ['code'], message: 'Ce code est déjà utilisé!')]
+#[ORM\HasLifecycleCallbacks]
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -71,6 +72,12 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255, maxMessage: 'Il faut au plus 255 caractères!')]
     private ?string $facebook = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateDerniereConnexion = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $dateDerniereEdition = null;
 
     public function getId(): ?int
     {
@@ -229,5 +236,35 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         $this->facebook = $facebook;
 
         return $this;
+    }
+
+    public function getDateDerniereConnexion(): ?\DateTimeInterface
+    {
+        return $this->dateDerniereConnexion;
+    }
+
+    public function setDateDerniereConnexion(\DateTimeInterface $dateDerniereConnexion): static
+    {
+        $this->dateDerniereConnexion = $dateDerniereConnexion;
+
+        return $this;
+    }
+
+    public function getDateDerniereEdition(): ?\DateTimeInterface
+    {
+        return $this->dateDerniereEdition;
+    }
+
+    public function setDateDerniereEdition(\DateTimeInterface $dateDerniereEdition): static
+    {
+        $this->dateDerniereEdition = $dateDerniereEdition;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function prePersistExempleChamp() : void {
+        $this->dateDerniereEdition = new \DateTime();
+        $this->dateDerniereConnexion = new \DateTime();
     }
 }
