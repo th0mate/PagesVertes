@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
     {% block cssSupplementaire %}{% endblock %}
     <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+    <script defer src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script defer src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script type="text/javascript" src="{{ asset('js/messagesFlash.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('js/visuels.js') }}" defer></script>
     {% block jsSupplementaire %}{% endblock %}
 </head>
@@ -19,42 +22,32 @@
 
 <body>
 
-<div class="flash" id="flash">
 
-    {% for message in app.flashes('success') %}
-        <div class='alert alert-success'>
-            <img src='{{ asset("img/success.png") }}' alt='icone'>
-            <p>{{ message }}</p>
-        </div>
-    {% endfor %}
+{% for message in app.flashes('success') %}
+    <script> document.addEventListener('DOMContentLoaded', function() { afficherMessageFlash('{{ message }}', 'success') });</script>
+{% endfor %}
 
-    {% for message in app.flashes('warning') %}
-        <div class='alert alert-warning'>
-            <img src='{{ asset("img/warning.png") }}' alt='icone'>
-            <p>{{ message }}</p>
-        </div>
-    {% endfor %}
+{% for message in app.flashes('warning') %}
+    <script> document.addEventListener('DOMContentLoaded', function() { afficherMessageFlash('{{ message }}', 'warning') });</script>
+{% endfor %}
 
-    {% for message in app.flashes('error') %}
-        <div class='alert alert-danger'>
-            <img src='{{ asset("img/danger.png") }}' alt='icone'>
-            <p>{{ message }}</p>
-        </div>
-    {% endfor %}
+{% for message in app.flashes('error') %}
+    <script> document.addEventListener('DOMContentLoaded', function() { afficherMessageFlash('{{ message }}', 'danger') });</script>
+{% endfor %}
 
-    {% for message in app.flashes('info') %}
-        <div class='alert alert-info'>
-            <img src='{{ asset("img/info.png") }}' alt='icone'>
-            <p>{{ message }}</p>
-        </div>
-    {% endfor %}
+{% for message in app.flashes('info') %}
+    <script> document.addEventListener('DOMContentLoaded', function() { afficherMessageFlash('{{ message }}', 'info') });</script>
+{% endfor %}
 
-</div>
 
 <script>
     let soleilImageURL = "{{ asset('img/soleil.png') }}";
     let luneImageURL = "{{ asset('img/lune.png') }}";
     let autoImageURL = "{{ asset('img/auto.png') }}";
+    window.successImageURL = "{{ asset('img/success.png') }}";
+    window.dangerImageURL = "{{ asset('img/danger.png') }}";
+    window.warningImageURL = "{{ asset('img/warning.png') }}";
+    window.infoImageURL = "{{ asset('img/info.png') }}";
 </script>
 
 <div class="separator">
@@ -91,7 +84,8 @@
                 <p>Accueil</p>
             </a>
 
-            <a class="element{% if page_actuelle == 'Parcourir' %} active {% endif %}" href="{{ path('afficherUtilisateurs') }}">
+            <a class="element{% if page_actuelle == 'Parcourir' %} active {% endif %}"
+               href="{{ path('afficherUtilisateurs') }}">
                 <img src="{{ asset('img/utilisateur.png') }}" alt="">
                 <p>Parcourir</p>
             </a>
@@ -112,11 +106,13 @@
 
         <div class="actionsUtilisateur">
             {% if not is_granted('ROLE_USER') %}
-                <a href="{{ path('connexion') }}" class="element{% if page_actuelle == 'Connexion' %} active {% endif %}">
+                <a href="{{ path('connexion') }}"
+                   class="element{% if page_actuelle == 'Connexion' %} active {% endif %}">
                     <img src="{{ asset('img/profil.png') }}" alt="">
                     <p>Connexion</p>
                 </a>
-                <a href="{{ asset('inscription') }}" class="element {% if page_actuelle == 'Inscription' %} active {% endif %}">
+                <a href="{{ asset('inscription') }}"
+                   class="element {% if page_actuelle == 'Inscription' %} active {% endif %}">
                     <img src="{{ asset('img/inscription.png') }}" alt="">
                     <p>Inscription</p>
                 </a>

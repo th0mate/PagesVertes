@@ -22,15 +22,9 @@ async function genererCodeAleatoire() {
  * @returns {Promise<boolean>} True si le code est disponible, false sinon
  */
 async function verifierSiCodeEstDisponible(code) {
-    /* TODO
-    await fetch("/utilisateurs/verifierCode/" + code)
-        .then(response => response.json())
-        .then(data => {
-            return data.disponible;
-        });
-    return false;
-     */
-    return true;
+    let URL = Routing.generate('verifierCode', {"code": code});
+    const response = await fetch(URL, {method: "POST"});
+    return await response.json();
 }
 
 
@@ -40,6 +34,7 @@ async function verifierSiCodeEstDisponible(code) {
 document.getElementById("utilisateur_code").addEventListener("input", async function () {
     let code = document.getElementById("utilisateur_code").value;
     if (!await verifierSiCodeEstDisponible(code)) {
-        alert("Ce code est déjà utilisé !");
+        afficherMessageFlash('Ce code est déjà utilisé, veuillez en choisir un autre', 'warning');
+        console.log('deja pris !')
     }
 });

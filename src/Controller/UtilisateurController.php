@@ -28,6 +28,12 @@ class UtilisateurController extends AbstractController
     {
     }
 
+
+    /**
+     * Route pour afficher la page d'accueil
+     * @param Request $request
+     * @return Response
+     */
     #[Route('/', name: 'pages_vertes', methods: ['GET', 'POST'])]
     public function pagesRouges(Request $request): Response
     {
@@ -35,12 +41,24 @@ class UtilisateurController extends AbstractController
         return $this->render('utilisateur/accueil.html.twig', ['page_actuelle' => 'Accueil']);
     }
 
+
+    /**
+     * Route pour afficher les crédits
+     * @return Response
+     */
     #[Route('/credits', name: 'credits', methods: 'GET')]
     public function afficherCredits(): Response
     {
         return $this->render('credits/credits.html.twig', ['page_actuelle' => 'Credits']);
     }
 
+
+    /**
+     * Route pour s'inscrire
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route('/inscription', name: 'inscription', methods: ['GET', 'POST'])]
     public function inscription(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -69,10 +87,15 @@ class UtilisateurController extends AbstractController
         return $this->render('utilisateur/inscription.html.twig', ['formInscription' => $form, 'page_actuelle' => 'Inscription']);
     }
 
+
+    /**
+     * Affiche la page listant tous les utilisateurs visibles
+     * @return Response : page
+     */
     #[Route('/utilisateurs', name: 'afficherUtilisateurs', methods: 'GET')]
     public function afficherProfils(): Response
     {
-       // TODO : trier les utilisateurs mais par quoi ? Les plus récents ?
+        // TODO : trier les utilisateurs mais par quoi ? Les plus récents ?
 
         $utilisateursVisible = $this->utilisateurRepository->findBy(['estVisible' => true]);
 
@@ -80,14 +103,37 @@ class UtilisateurController extends AbstractController
     }
 
 
+    /**
+     * Route pour se connecter
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response : page de connexion
+     */
     #[Route('/connexion', name: 'connexion', methods: ['GET', 'POST'])]
-    public function connexion(AuthenticationUtils $authenticationUtils) : Response {
+    public function connexion(AuthenticationUtils $authenticationUtils): Response
+    {
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('pages_vertes');
         }
 
         $lastUsername = $authenticationUtils->getLastUsername();
         return $this->render('utilisateur/connexion.html.twig', ['page_actuelle' => 'Connexion', 'last_username' => $lastUsername]);
+    }
+
+
+    /**
+     * Route pour vérifier si un code utilisateur est déjà utilisé dans la BD, appelée depuis du JS
+     * @param Request $request
+     * @return Response : 'true' si le code est libre, false sinon
+     */
+    #[Route('/utilisateur/verifierCode', name: 'verifierCode', options: ["expose" => true], methods: ['POST'])]
+    public function verifierCode(Request $request): Response
+    {
+        $code = $request->get('code');
+        $utilisateur = $this->utilisateurRepository->findOneBy(['code' => $code]);
+        if ($utilisateur) {
+            return new Response('false');
+        }
+        return new Response('true');
     }
 
 }
