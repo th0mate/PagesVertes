@@ -36,7 +36,7 @@ form:not(.element) > div:not(.wrapSwitch, .wrapSubmit) {
     transition: 0.5s;
     border-radius: 5px;
 
-    img {
+    img:not(.randomImage) {
         display: none;
         padding-left: 10px;
         width: 25px;
@@ -242,8 +242,14 @@ input:-webkit-autofill:active {
         padding-right: 5px;
     }
 
-    .inputbox {
+    .inputbox:not(.randomBox) {
         width: 90%;
+    }
+
+    .randomBox {
+        width: 150px;
+        margin-right: auto;
+        margin-left: 7px;
     }
 
     .wrapSwitch {

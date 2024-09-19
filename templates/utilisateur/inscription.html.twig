@@ -9,6 +9,10 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/formulaires.css') }}">
 {% endblock %}
 
+{% block jsSupplementaire %}
+    <script type="text/javascript" src="{{ asset('js/codePersonnel.js') }}" defer></script>
+{% endblock %}
+
 {% block page_content %}
     <div class="onglet1">
         <h1>Inscription</h1>
@@ -55,12 +59,13 @@
         <p class="help-input-form">Adresse email valide.</p>
     </div>
     <div>
-        <div class="inputbox">
+        <div class="inputbox randomBox">
             {{ form_widget(formInscription.code, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
             {# {{ form_label(formInscription.code) }} #}
             <label for="code">Code personnel</label>
             <img class="success" src="{{ asset('img/success.png') }}" alt="">
             <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+            <div class="bouton random" onclick="genererCodeAleatoire()"><img class="randomImage" src="{{ asset('img/de.png') }}" alt="">Aléatoire</div>
         </div>
         <p>Code unique de 6 caractères relié à votre compte.</p>
     </div>
