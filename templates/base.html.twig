@@ -112,7 +112,7 @@
 
         <div class="actionsUtilisateur">
             {% if not is_granted('ROLE_USER') %}
-                <a class="element{% if page_actuelle == 'Connexion' %} active {% endif %}">
+                <a href="{{ path('connexion') }}" class="element{% if page_actuelle == 'Connexion' %} active {% endif %}">
                     <img src="{{ asset('img/profil.png') }}" alt="">
                     <p>Connexion</p>
                 </a>
@@ -121,10 +121,16 @@
                     <p>Inscription</p>
                 </a>
             {% else %}
-                <a class="element{% if page_actuelle == 'Deconnexion' %} active {% endif %}">
+                <!--
+                <a href="{{ path('_logout_main') }}" class="element{% if page_actuelle == 'Deconnexion' %} active {% endif %}">
                     <img src="{{ asset('img/se-deconnecter.png') }}" alt="">
                     <p>Déconnexion</p>
                 </a>
+                -->
+                <form method="post" class="element" action="{{ path('_logout_main') }}">
+                    <img src="{{ asset('img/se-deconnecter.png') }}" alt="">
+                    <button id="btn-deconnexion">Déconnexion</button>
+                </form>
             {% endif %}
         </div>
 
