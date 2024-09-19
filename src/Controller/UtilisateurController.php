@@ -78,4 +78,10 @@ class UtilisateurController extends AbstractController
         return $this->render('utilisateur/listeUtilisateurs.html.twig', ['page_actuelle' => 'Parcourir', "utilisateursVisible" => $utilisateursVisible]);
     }
 
+
+    #[Route('/connexion', name: 'connexion', methods: ['GET', 'POST'])]
+    public function connexion() : Response {
+        return $this->render('utilisateur/connexion.html.twig');
+    }
+
 }
