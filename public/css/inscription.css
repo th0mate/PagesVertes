@@ -112,7 +112,7 @@ form > div:not(.wrapSwitch, .wrapSubmit) {
     margin: calc(var(--s) / 2);
     display: grid;
     cursor: pointer;
-    background-color: #ff7a7a;
+    background-color: var(--rouge);
     box-sizing: content-box;
     overflow: hidden;
     transition: .3s .1s;

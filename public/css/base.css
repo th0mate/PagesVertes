@@ -22,6 +22,7 @@ body {
 
 :root {
     --vert: #4CAF50;
+    --rouge: #d45260;
 }
 
 nav {
@@ -201,6 +202,10 @@ nav {
             width: 90%;
             padding-top: 30px;
             cursor: pointer;
+
+            .logoBlanc {
+                display: none;
+            }
         }
 
         .close {

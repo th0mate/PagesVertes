@@ -22,13 +22,16 @@ function change_period2(period) {
     var semester = document.getElementById("semester2");
     var annual = document.getElementById("annual2");
     var selector = document.getElementById("selector");
+
     if (period === "clair") {
         selector.style.left = 0;
         selector.style.width = monthly.clientWidth + "px";
         selector.style.backgroundColor = "#4CAF50";
         selector.innerHTML = `<img src="${soleilImageURL}" alt="">`;
-        StockerCookieTheme("clair");
         document.querySelector('.dark').classList.remove('dark');
+        document.querySelector('.logoNoir').style.display = "flex";
+        document.querySelector('.logoBlanc').style.display = "none";
+        StockerCookieTheme("clair");
 
 
     } else if (period === "auto") {
@@ -40,6 +43,8 @@ function change_period2(period) {
 
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.querySelector('html').classList.add('dark');
+            document.querySelector('.logoNoir').style.display = "none";
+            document.querySelector('.logoBlanc').style.display = "flex";
         }
     } else {
         selector.style.left = monthly.clientWidth + semester.clientWidth + 1 + "px";
@@ -47,6 +52,8 @@ function change_period2(period) {
         selector.innerHTML = `<img src="${luneImageURL}" alt="">`;
         selector.style.backgroundColor = "#4CAF50";
         document.querySelector('html').classList.add('dark');
+        document.querySelector('.logoNoir').style.display = "none";
+        document.querySelector('.logoBlanc').style.display = "flex";
         StockerCookieTheme("sombre");
     }
 }
