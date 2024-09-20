@@ -177,6 +177,11 @@ form:not(.element) > div:not(.wrapSwitch, .wrapSubmit) {
     background-color: #555555;
 }
 
+.disabled {
+    cursor: default;
+    opacity: 0.5;
+}
+
 
 /**
 ------------------------------------------------------------------------------------------------------------------------
