@@ -53,7 +53,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(exactly: 6, exactMessage: 'Il faut au 6 caractères!')]
-    #[Assert\Regex(pattern:'#^[a-zA-Z\d\w\W]$#')]
+    #[Assert\Regex(pattern:'#^[a-zA-Z0-9]+$#', message: 'Le code ne doit contenir que des caractères alphanumériques.')]
     private ?string $code = null;
 
     #[ORM\Column(options: ["default" => true])]
