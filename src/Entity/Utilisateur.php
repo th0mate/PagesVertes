@@ -52,6 +52,8 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $adresseEmail = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(exactly: 6, exactMessage: 'Il faut au 6 caractères!')]
+    #[Assert\Regex(pattern:'#^[a-zA-Z\d\w\W]$#')]
     private ?string $code = null;
 
     #[ORM\Column(options: ["default" => true])]
