@@ -6,7 +6,6 @@
 
 
 .parcourirAccueil {
-
     width: 95%;
     border: 1px solid black;
     display: flex;
@@ -20,6 +19,10 @@
     }
 
 }
+
+
+
+
 
 .gridListe {
     display: grid;

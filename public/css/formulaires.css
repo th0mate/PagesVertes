@@ -4,7 +4,7 @@
  */
 
 
-form:not(.element) > div:not(.wrapSwitch, .wrapSubmit) {
+form:not(.element, .recherche) > div:not(.wrapSwitch, .wrapSubmit) {
     display: flex;
     flex-direction: column;
     justify-content: center;
