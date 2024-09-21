@@ -21,7 +21,60 @@
 }
 
 
+.recherche {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    padding: 10px;
 
+    label {
+        font-weight: normal;
+        padding-right: 15px;
+        font-size: 1.2em;
+    }
+
+    input {
+        max-width: 200px;
+        padding: 10px;
+        border: 1px solid black;
+        border-right: none;
+        border-radius: 5px 0 0 5px;
+    }
+
+    button {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 0 5px 5px 0;
+        border-left: none;
+        background-color: var(--vert);
+        color: white;
+        cursor: pointer;
+        position: relative;
+        padding-right: 50px;
+        transition: 0.5s ease;
+
+        &:hover {
+            background-color: #555555;
+        }
+
+        img {
+            width: 20px;
+            transition: 0.5s ease;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            filter: invert(1);
+        }
+
+    }
+
+    button:hover img {
+        right: 8px;
+    }
+}
 
 
 .gridListe {
@@ -107,6 +160,19 @@
         color: white;
     }
 
+    .recherche {
+
+        input {
+            background-color: #333333;
+            color: white;
+            border: 1px solid white;
+        }
+
+        button {
+            border: 1px solid white;
+        }
+    }
+
 }
 
 
@@ -117,6 +183,11 @@
 
 
 @media (max-width: 1000px) {
+
+    .recherche {
+        width: 95%;
+        padding: 10px;
+    }
 
     .parcourirAccueil {
         flex-direction: column-reverse;
@@ -139,6 +210,24 @@
 
 
 @media (max-width: 600px) {
+
+    .recherche {
+        width: 90%;
+        padding: 10px;
+
+        label {
+            font-size: 1em;
+        }
+
+        input {
+            max-width: 60px;
+        }
+
+        button {
+            max-width: 150px;
+        }
+
+    }
 
     .gridListe {
         grid-template-columns: repeat(auto-fill, 100%);
