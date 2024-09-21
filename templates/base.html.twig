@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>{% block page_title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/base.css') }}">
+    {% block cssSupplementaire %}{% endblock %}
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+    <script defer src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script defer src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script type="text/javascript" src="{{ asset('js/messagesFlash.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/visuels.js') }}" defer></script>
+    {% block jsSupplementaire %}{% endblock %}
+</head>
+
+<nav onclick="afficherMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+</nav>
+
+<body>
+
+
+{% for message in app.flashes('success') %}
+    <script> document.addEventListener('DOMContentLoaded', function() { afficherMessageFlash('{{ message }}', 'success') });</script>
+{% endfor %}
+
+{% for message in app.flashes('warning') %}
+    <script> document.addEventListener('DOMContentLoaded', function() { afficherMessageFlash('{{ message }}', 'warning') });</script>
+{% endfor %}
+
+{% for message in app.flashes('error') %}
+    <script> document.addEventListener('DOMContentLoaded', function() { afficherMessageFlash('{{ message }}', 'danger') });</script>
+{% endfor %}
+
+{% for message in app.flashes('info') %}
+    <script> document.addEventListener('DOMContentLoaded', function() { afficherMessageFlash('{{ message }}', 'info') });</script>
+{% endfor %}
+
+
+<script>
+    let soleilImageURL = "{{ asset('img/soleil.png') }}";
+    let luneImageURL = "{{ asset('img/lune.png') }}";
+    let autoImageURL = "{{ asset('img/auto.png') }}";
+    window.successImageURL = "{{ asset('img/success.png') }}";
+    window.dangerImageURL = "{{ asset('img/danger.png') }}";
+    window.warningImageURL = "{{ asset('img/warning.png') }}";
+    window.infoImageURL = "{{ asset('img/info.png') }}";
+</script>
+
+<div class="separator">
+
+    <div class="switchLight">
+        <div class="switch_3_ways_v2">
+            <div id="monthly2" class="switch2 monthly" onclick="change_period2('clair')"><img
+                        src="{{ asset('img/soleil.png') }}" alt=""></div>
+            <div id="semester2" class="switch2 semester" onclick="change_period2('auto')"><img
+                        src="{{ asset('img/auto.png') }}" alt=""></div>
+            <div id="annual2" class="switch2 annual" onclick="change_period2('sombre')"><img
+                        src="{{ asset('img/lune.png') }}" alt=""></div>
+            <div id="selector" class="selector"></div>
+        </div>
+    </div>
+
+    <div class="bandeau">
+
+        <div class="wrapLogo">
+            <div class="wrapActionsBandeau">
+                <img class="close invertLight" src="{{ asset('img/x.png') }}" alt="" onclick="cacherMenu()">
+            </div>
+
+            <a class="logo" href="{{ path('pages_vertes') }}">
+                <img src="{{ asset('img/logo.png') }}" class="logoNoir" alt="">
+                <img src="{{ asset('img/logo-fondnoir.png') }}" class="logoBlanc" alt="">
+            </a>
+        </div>
+
+        <div class="wrapElements">
+
+            <a class="element{% if page_actuelle == 'Accueil' %} active {% endif %}" href="{{ path('pages_vertes') }}">
+                <img src="{{ asset('img/accueil.png') }}" alt="">
+                <p>Accueil</p>
+            </a>
+
+            <a class="element{% if page_actuelle == 'Parcourir' %} active {% endif %}"
+               href="{{ path('afficherUtilisateurs') }}">
+                <img src="{{ asset('img/utilisateur.png') }}" alt="">
+                <p>Parcourir</p>
+            </a>
+
+            <a class="element {% if page_actuelle == 'Credits' %} active {% endif %}" href="{{ path('credits') }}">
+                <img src="{{ asset('img/credits.png') }}" alt="">
+                <p>Crédits - Sources</p>
+            </a>
+
+            {% if is_granted('ROLE_USER') %}
+                <a class="element {% if page_actuelle == 'Profil' %} active {% endif %}">
+                    <img src="{{ asset('img/utilisateur.png') }}" alt="">
+                    <p>Mon profil</p>
+                </a>
+            {% endif %}
+
+        </div>
+
+        <div class="actionsUtilisateur">
+            {% if not is_granted('ROLE_USER') %}
+                <a href="{{ path('connexion') }}"
+                   class="element{% if page_actuelle == 'Connexion' %} active {% endif %}">
+                    <img src="{{ asset('img/profil.png') }}" alt="">
+                    <p>Connexion</p>
+                </a>
+                <a href="{{ asset('inscription') }}"
+                   class="element {% if page_actuelle == 'Inscription' %} active {% endif %}">
+                    <img src="{{ asset('img/inscription.png') }}" alt="">
+                    <p>Inscription</p>
+                </a>
+            {% else %}
+                <!--
+                <a href="{{ path('_logout_main') }}" class="element{% if page_actuelle == 'Deconnexion' %} active {% endif %}">
+                    <img src="{{ asset('img/se-deconnecter.png') }}" alt="">
+                    <p>Déconnexion</p>
+                </a>
+                -->
+                <form method="post" class="element" action="{{ path('_logout_main') }}">
+                    <img src="{{ asset('img/se-deconnecter.png') }}" alt="">
+                    <button id="btn-deconnexion">Déconnexion</button>
+                </form>
+            {% endif %}
+        </div>
+
+    </div>
+
+    <div class="other">
+        {% block page_content %}
+        {% endblock %}
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}
+    Pages Vertes | Accueil
+{% endblock %}
+
+{% block cssSupplementaire %}<link rel="stylesheet" type="text/css" href="{{ asset('css/accueil.css') }}">{% endblock %}
+
+{% block page_content %}
+    <div class="onglet1">
+        <h1>Accueil</h1>
+    </div>
+
+    <div class="main">
+        <h1 class="welcome">Bienvenue sur <span class="greenText">Pages Vertes</span></h1>
+        <h2 class="light">L'annuaire en ligne made in IUT Montpellier-Sète !</h2>
+    </div>
+
+    <div class="wrapTop">
+        <img class="illu" src="{{ asset('img/illuRechercher.png') }}" alt="">
+
+        <div>
+            <h2>Avec <span class="greenText">Pages Vertes</span>, trouvez vos futurs contacts en un clin d'oeil.</h2>
+            <h4 class="light">Parcourez les contacts de nos nombreux utilisateurs, et contactez-les sur vos réseaux
+                favoris.</h4>
+            <h4 class="light">Recherchez les utilisateurs privés par leur code unique d'identification : c'est <span
+                        class="greenText">facile</span> et <span class="greenText">rapide</span> !</h4>
+        </div>
+    </div>
+
+    <div class="gridAccueil">
+
+        <div class="gridItem">
+            <img src="{{ asset('img/bouclier.png') }}" alt="">
+
+            <div>
+                <h3 class="light greenText">Sécurité</h3>
+                <p>Vous pouvez vous inscrire en tant que profil public ou privé pour protéger votre confidentialité.</p>
+                <br>
+            </div>
+        </div>
+
+        <div class="gridItem">
+            <img src="{{ asset('img/creer.png') }}" alt="">
+
+            <div>
+                <h3 class="light greenText">Fonctionnalités poussées</h3>
+                <p>Créez un compte pour rechercher d'autres utilisateurs !</p>
+                <a class="bouton" href="{{ path('inscription') }}">Créer un compte</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

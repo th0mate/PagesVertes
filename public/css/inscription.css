@@ -1,0 +1,25 @@
+.wrapTop {
+    margin-bottom: 20px;
+    img {
+        width: auto;
+        height: 200px;
+    }
+}
+
+
+.random {
+    justify-content: flex-start;
+    position: absolute;
+    right: -150px;
+    top: 60%;
+    padding: 7px;
+    transform: translateY(-60%);
+
+    img {
+        width: 20px;
+        padding-right: 15px;
+        filter: invert(1);
+    }
+
+}
+

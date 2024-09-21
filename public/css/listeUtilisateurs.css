@@ -1,0 +1,245 @@
+
+/**
+------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------- STYLE GLOBAL --------------------------------------------------------
+ */
+
+
+.parcourirAccueil {
+    width: 95%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    .illu {
+        width: 250px;
+    }
+
+}
+
+
+.recherche {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    padding: 10px;
+
+    label {
+        font-weight: normal;
+        padding-right: 15px;
+        font-size: 1.2em;
+    }
+
+    input {
+        max-width: 200px;
+        padding: 10px;
+        border: 1px solid black;
+        border-right: none;
+        border-radius: 5px 0 0 5px;
+    }
+
+    button {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 0 5px 5px 0;
+        border-left: none;
+        background-color: var(--vert);
+        color: white;
+        cursor: pointer;
+        position: relative;
+        padding-right: 50px;
+        transition: 0.5s ease;
+
+        &:hover {
+            background-color: #555555;
+        }
+
+        img {
+            width: 20px;
+            transition: 0.5s ease;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            filter: invert(1);
+        }
+
+    }
+
+    button:hover img {
+        right: 8px;
+    }
+}
+
+
+.gridListe {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 280px);
+    grid-gap: 25px;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding-top: 30px;
+    max-width: 96%;
+    padding-bottom: 30px;
+
+    .utilisateur {
+        text-decoration: none;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        align-content: flex-start;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        width: 96%;
+        height: 100px;
+        color: black;
+
+        box-shadow: 0 0 10px var(--vert);
+        transition: box-shadow 0.5s;
+
+        .estVisible {
+            width: 18px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+
+        &:hover {
+            box-shadow: 0 0 20px var(--vert);
+        }
+
+        * {
+            margin: 0;
+        }
+
+        div {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-start;
+            align-content: center;
+            max-width: 95%;
+            font-size: 0.8em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+
+            img {
+                width: 15px;
+                padding-right: 10px;
+            }
+        }
+    }
+
+}
+
+
+/**
+------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------- DARK MODE -------------------------------------------------------
+ */
+
+
+.dark {
+
+    .parcourirAccueil {
+        border: 1px solid white;
+    }
+
+    .utilisateur {
+        color: white;
+    }
+
+    .recherche {
+
+        input {
+            background-color: #333333;
+            color: white;
+            border: 1px solid white;
+        }
+
+        button {
+            border: 1px solid white;
+        }
+    }
+
+}
+
+
+/**
+------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------- RESPONSIVE -------------------------------------------------------
+ */
+
+
+@media (max-width: 1000px) {
+
+    .recherche {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .parcourirAccueil {
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+
+        .illu {
+            width: 60%;
+            padding-left: 0;
+        }
+
+        div {
+            padding: 0;
+        }
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .recherche {
+        width: 90%;
+        padding: 10px;
+
+        label {
+            font-size: 1em;
+        }
+
+        input {
+            max-width: 60px;
+        }
+
+        button {
+            max-width: 150px;
+        }
+
+    }
+
+    .gridListe {
+        grid-template-columns: repeat(auto-fill, 100%);
+        grid-gap: 10px;
+    }
+
+    .gridListe .utilisateur {
+        height: 150px;
+    }
+
+    .parcourirAccueil {
+        padding: 10px;
+    }
+
+}
