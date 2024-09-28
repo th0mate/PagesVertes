@@ -102,7 +102,6 @@ class UtilisateurController extends AbstractController
     #[Route('/utilisateurs', name: 'afficherUtilisateurs', methods: ['GET', 'POST'])]
     public function afficherProfils(Request $request, Security $security): Response
     {
-        // TODO : trier les utilisateurs mais par quoi ? Les plus récents ?
 
         $form = $this->createForm(FindUserByCodeType::class, null, [
             'method' => 'POST',
