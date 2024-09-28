@@ -102,11 +102,13 @@ class CreateUserCommand extends Command
 
         if ($input->getOption('visibility') === null) {
             $visibility = $io->confirm("Veuillez saisir une visibilité", true);
+            $visibility = $visibility ? "true" : "false";
             $input->setOption('visibility', $visibility);
         }
 
         if ($input->getOption('admin') === null) {
             $admin = $io->confirm("Veuillez saisir si l'utilisateur est un admin", false);
+            $admin = $admin ? "true" : "false";
             $input->setOption('admin', $admin);
         }
     }
@@ -131,12 +133,19 @@ class CreateUserCommand extends Command
 
     private function askForValidInput(SymfonyStyle $io, string $question, callable $validationCallback, string $errorMessage, bool $hidden = false): ?string
     {
-        return $io->ask($question, null, function ($value) use ($validationCallback, $errorMessage) {
-            if ($validationCallback($value)) {
-                throw new \RuntimeException($errorMessage);
-            }
-            return $value;
-        }, $hidden);
+        return $hidden
+            ? $io->askHidden($question, function ($value) use ($validationCallback, $errorMessage) {
+                if ($validationCallback($value)) {
+                    throw new \RuntimeException($errorMessage);
+                }
+                return $value;
+            })
+            : $io->ask($question, null, function ($value) use ($validationCallback, $errorMessage) {
+                if ($validationCallback($value)) {
+                    throw new \RuntimeException($errorMessage);
+                }
+                return $value;
+            });
     }
 
     private function generateCodeRandom(): string

@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -24,7 +25,6 @@ class EditUtilisateurType extends AbstractType
     {
         $builder
             ->add('code', TextType::class, [
-                'mapped' => true,
                 'attr' => [
                     'minlength' => 6,
                     'maxlength' => 6,
@@ -98,7 +98,13 @@ class EditUtilisateurType extends AbstractType
             ->add('adresseEmail', EmailType::class, [
                 'attr' => [
                     'maxlength' => 255
+                ],
+                'constraints' => [
+                    new NotBlank(['message' => 'L\'adresse email ne peut pas être vide']),
+                    new NotNull(['message' => 'L\'adresse email ne peut pas être null']),
+                    new Email(['message' => 'L\'adresse mail n\'est pas valide'])
                 ]
+
             ])
             ->add('modifier', SubmitType::class);
 
