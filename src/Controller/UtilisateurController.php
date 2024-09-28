@@ -116,29 +116,23 @@ class UtilisateurController extends AbstractController
             $utilisateur = $this->utilisateurRepository->findOneBy(['code' => $code]);
 
             //Si le code n'est pas valide, on reste sur la même page et on change le message flash
-            if($utilisateur === null)
-            {
+            if ($utilisateur === null) {
                 $this->addFlash("error", "Cet utilisateur n'existe pas");
-            }
-            else
-            {
+            } else {
                 $this->addFlash('success', 'Profil affiché avec succès !');
                 return $this->redirectToRoute('afficherProfil', ['code' => $code]);
             }
         }
 
         $utilisateurConnecte = $this->getUser();
-        if($utilisateurConnecte !== null && $security->isGranted('ROLE_ADMIN'))
-        {
+        if ($utilisateurConnecte !== null && $security->isGranted('ROLE_ADMIN')) {
             $utilisateursVisible = $this->utilisateurRepository->findAll();
-        }
-        else
-        {
+        } else {
             $utilisateursVisible = $this->utilisateurRepository->findBy(['estVisible' => true]);
         }
 
         return $this->render('utilisateur/listeUtilisateurs.html.twig', ['page_actuelle' => 'Parcourir', "utilisateursVisible" => $utilisateursVisible
-                                                                                , 'form' => $form]);
+            , 'form' => $form]);
     }
 
 
@@ -169,6 +163,13 @@ class UtilisateurController extends AbstractController
     {
         $code = $request->get('code');
         $utilisateur = $this->utilisateurRepository->findOneBy(['code' => $code]);
+
+        $utilisateurConnecte = $this->getUser();
+
+        if ($utilisateurConnecte && $utilisateurConnecte->getCode() === $code) {
+            return new Response('true');
+        }
+
         if ($utilisateur) {
             return new Response('false');
         }
@@ -177,7 +178,7 @@ class UtilisateurController extends AbstractController
 
     #[Route('/utilisateurs/{login}', name: 'editerProfil', methods: ['GET', 'POST'])]
     #[ISGranted(attribute: 'USER_EDIT', subject: 'utilisateur')]
-    public function editerProfil(Utilisateur $utilisateur, Request $request) : Response
+    public function editerProfil(Utilisateur $utilisateur, Request $request): Response
     {
         $form = $this->createForm(EditUtilisateurType::class, $utilisateur, [
             'method' => 'POST',
@@ -217,7 +218,7 @@ class UtilisateurController extends AbstractController
         var_dump($code);
         $utilisateur = $this->utilisateurRepository->findOneBy(['code' => $code]);
         if ($utilisateur === null) {
-            $this->addFlash('danger', 'Erreur : Utilisateur non trouvé !');
+            $this->addFlash('warning', 'Erreur : Utilisateur non trouvé !');
             return $this->redirectToRoute('afficherUtilisateurs');
         }
         return $this->redirectToRoute('afficherProfil', ['code' => $utilisateur->getCode()]);
@@ -225,16 +226,13 @@ class UtilisateurController extends AbstractController
 
     #[Route('/utilisateurs/{login}', name: 'supprimerUtilisateur', options: ["expose" => true], methods: ['DELETE'])]
     #[ISGranted(attribute: 'USER_DELETE', subject: 'utilisateur')]
-    public function supprimerUtilisateur(Utilisateur $utilisateur, TokenStorageInterface $tokenStorage, SessionInterface $session) : Response
+    public function supprimerUtilisateur(Utilisateur $utilisateur, TokenStorageInterface $tokenStorage, SessionInterface $session): Response
     {
         $this->entityManager->remove($utilisateur);
         $this->entityManager->flush();
 
-        if($utilisateur === $this->getUser()) {
-            // Déconnexion de l'utilisateur
+        if ($utilisateur === $this->getUser()) {
             $tokenStorage->setToken(null);
-
-            // Invalider la session
             $session->invalidate();
         }
 
@@ -246,8 +244,7 @@ class UtilisateurController extends AbstractController
     public function infosUtilisateur(?string $code): Response
     {
         $utilisateur = $this->utilisateurRepository->findOneBy(["code" => $code]);
-        if($utilisateur == null)
-        {
+        if ($utilisateur == null) {
             return new JsonResponse(null, Response::HTTP_NOT_FOUND);
         }
         return new JsonResponse($utilisateur, Response::HTTP_OK);
