@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block page_title %} Erreur 404 {% endblock %}
+{% block cssSupplementaire %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/maintenance.css') }}">
+{% endblock %}
+
+{% block page_content %}
+    <div class="wrapError">
+
+        <img src="{{ asset('img/logo-fondnoir.png') }}" class="logoMaintenance" alt="">
+        <div class="maintenance">
+            <img src="{{ asset('img/404.png') }}" class="logoMaintenance" alt="">
+            <h2 class="greenText">Erreur 404</h2>
+            <h4>Page <span class="greenText">non trouvée</span> essayez une autre URL.
+            </h4>
+        </div>
+
+        <div class="boutonAlert" onclick="window.history.back();">Revenir en arrière</div>
+    </div>
+{% endblock %}

@@ -1,10 +1,23 @@
-{% if utilisateur.estVisible %}
-    <div class="utilisateur">
+{% if (not utilisateur.estVisible and is_granted('ROLE_ADMIN')) or utilisateur.estVisible %}
+    <a {% if is_granted('ROLE_USER') and utilisateur.code == app.user.code %} href="{{ path('afficherProfil', {'code' : app.user.code}) }}" {% else %} href="{{ path('afficherProfil', {'code' : utilisateur.code}) }}" {% endif %}
+            class="utilisateur">
         <h3 class="light greenText"> {{ utilisateur.login }}</h3>
-        <!--TODO AJOUTER IF estAdmin pour qu'il voit les profils cachés ou non
-         <img class="estVisible invertLight" src="{ asset('img/ferme.png') }" alt=""> -->
-        <div><img class="invertLight" src="{{ asset('img/telephone.png') }}" alt="">{% if utilisateur.telephone != '' %} {{ utilisateur.telephone }} {% else %} Non Communiqué {% endif %}</div>
-        <div><img class="invertLight" src="{{ asset('img/mail.png') }}" alt="">{% if utilisateur.adresseEmail != '' %} {{ utilisateur.adresseEmail }} {% else %} Non Communiqué {% endif %}</div>
-        <div><img class="invertLight" src="{{ asset('img/facebook.png') }}" alt=""> {% if utilisateur.facebook != '' %} {{ utilisateur.facebook }} {% else %} Non Communiqué {% endif %}</div>
-    </div>
+        {% if is_granted('ROLE_USER') and is_granted('ROLE_ADMIN') %}
+            {% if utilisateur.estVisible %}
+                <img class="estVisible invertLight" src="{{ asset('img/ouvre.png') }}" alt="">
+            {% else %}
+                <img class="estVisible invertLight" src="{{ asset('img/ferme.png') }}" alt="">
+            {% endif %}
+        {% endif %}
+        <div><img class="invertLight" src="{{ asset('img/telephone.png') }}"
+                  alt="">{% if utilisateur.telephone != '' %} {{ utilisateur.telephone }} {% else %} Non Communiqué {% endif %}
+        </div>
+        <div><img class="invertLight" src="{{ asset('img/mail.png') }}"
+                  alt="">{% if utilisateur.adresseEmail != '' %} {{ utilisateur.adresseEmail }} {% else %} Non Communiqué {% endif %}
+        </div>
+        <div><img class="invertLight" src="{{ asset('img/facebook.png') }}"
+                  alt=""> {% if utilisateur.facebook != '' %} {{ utilisateur.facebook }} {% else %} Non Communiqué {% endif %}
+        </div>
+    </a>
+
 {% endif %}

@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}
+    Pages Vertes | Profil de {% if utilisateur.prenom != '' and utilisateur.nom != '' %} {{ utilisateur.prenom|capitalize }} {{ utilisateur.nom|capitalize }} {% else %} {{ utilisateur.login }} {% endif %}
+{% endblock %}
+
+{% block cssSupplementaire %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/profil.css') }}">
+{% endblock %}
+
+{% block jsSupplementaire %}
+    <script type="text/javascript" src="{{ asset('js/codePersonnel.js') }}" defer></script>
+    <script type="text/javascript" src="{{ asset('js/deleteUser.js') }}" defer></script>
+{% endblock %}
+
+
+{% block page_content %}
+    <div class="onglet1">
+        {% if is_granted('ROLE_USER') and utilisateur.login == app.user.login %}
+            <h1>Mon profil</h1>
+        {% else %}
+            <h1>Profil
+                de {% if utilisateur.prenom != '' and utilisateur.nom != '' %} {{ utilisateur.prenom|capitalize }} {{ utilisateur.nom|capitalize }} {% else %} {{ utilisateur.login }} {% endif %}</h1>
+        {% endif %}
+    </div>
+
+    {% if is_granted('ROLE_USER') and utilisateur.login != app.user.login %}
+        <h2 class="path"><a href="{{ path('afficherUtilisateurs') }}">Parcourir</a> > Profil
+            de {% if utilisateur.prenom != '' and utilisateur.nom != '' %} {{ utilisateur.prenom|capitalize }} {{ utilisateur.nom|capitalize }} {% else %} {{ utilisateur.login }} {% endif %}
+        </h2>
+    {% endif %}
+
+
+    <div class="wrapTop">
+        <img class="illu" src="{{ asset('img/voirUtilisateur.png') }}" alt="">
+
+        <div>
+            <h2>Tous les
+                détails {% if is_granted('ROLE_USER') and utilisateur.login == app.user.login %} de votre profil {% else %} du profil de {% endif %}
+                <span class="greenText">{% if utilisateur.prenom != '' %} {{ utilisateur.prenom|capitalize }} {{ utilisateur.nom|capitalize }} {% else %} {{ utilisateur.login }} {% endif %}</span>
+            </h2>
+            {% if is_granted('ROLE_USER') and utilisateur.login == app.user.login %}
+                <h4 class="light">Accédez à votre profil, copiez votre <span class="greenText">code personnel</span>,
+                    modifiez vos <span
+                            class="greenText">données</span> ou votre <span class="greenText">mot de passe</span>, ou
+                    supprimez votre compte ici !</h4>
+            {% else %}
+                <h4 class="light">Accédez aux <span class="greenText">informations</span> de ce compte en un coup d'œil.
+                </h4>
+                <h4 class="light">Vous pouvez également <span class="greenText">copier</span> son code personnel, pour
+                    le <span class="greenText">rechercher</span> ensuite plus tard via la barre de recherche dans
+                    l'onglet <span class="greenText">"Parcourir"</span>.</h4>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="profil">
+
+        <div class="infos">
+            <h2><span class="greenText">Informations</span> du profil :</h2>
+            <h4 class="greenText">
+                {% if utilisateur.prenom != '' and utilisateur.nom != '' %}
+                    {{ utilisateur.prenom|capitalize }} {{ utilisateur.nom|capitalize }}
+                {% elseif utilisateur.prenom != '' %}
+                    {{ utilisateur.prenom|capitalize }}
+                {% elseif utilisateur.nom != '' %}
+                    {{ utilisateur.nom|capitalize }}
+                {% endif %}
+                @{{ utilisateur.login }} </h4>
+            <p><span class="greenText">Code de profil : </span>{{ utilisateur.code }}
+                <span onclick="copierCode('{{ utilisateur.code }}')" class="copy"><img
+                            src="{{ asset('img/copier.png') }}" alt=""></span>
+            </p>
+            <p>
+                <span class="greenText">Dernière connexion :</span>
+                {% if utilisateur.dateDerniereConnexion != null %}
+                    {{ utilisateur.dateDerniereConnexion|date('d/m/Y - H:i') }}
+                {% else %}Non Communiqué
+                {% endif %}
+            </p>
+            <p><span class="greenText">Téléphone :</span>
+                {% if utilisateur.telephone != '' %}
+                    {{ utilisateur.telephone }}
+                {% else %}Non Communiqué
+                {% endif %}
+            </p>
+            <p><span class="greenText">Adresse Email :</span>
+                {% if utilisateur.adresseEmail != '' %}
+                    {{ utilisateur.adresseEmail }}
+                {% else %}Non Communiqué
+                {% endif %}
+            </p>
+            <p><span class="greenText">Facebook :</span>
+                {% if utilisateur.facebook != '' %}
+                    {{ utilisateur.facebook }}
+                {% else %}Non Communiqué
+                {% endif %}
+            </p>
+            <p><span class="greenText">Visibilité :</span>
+                {% if utilisateur.estVisible %}
+                    <span class="greenText">PUBLIQUE</span>
+                {% else %}
+                    <span class="redText">PRIVÉE</span>
+                {% endif %}
+            </p>
+            <p><span class="greenText">Dernière modification :</span>
+                {% if utilisateur.dateDerniereEdition != null %}
+                    {{ utilisateur.dateDerniereEdition|date('d/m/Y - H:i') }}
+                {% else %}Non Communiqué
+                {% endif %}
+            </p>
+        </div>
+
+        {% if is_granted('USER_EDIT', utilisateur) %}
+            <div class="actions">
+                <h2>Vos <span class="greenText">actions :</span></h2>
+
+                <a href="{{ path('editerProfil', {'login' : utilisateur.login}) }}" class="action">
+                    <img src="{{ asset('img/modifier.png') }}" alt="">Modifier le profil</a>
+
+                <a href="{{ path('changerMotDePasse', {'login' : utilisateur.login}) }}" class="action">
+                    <img src="{{ asset('img/cadenas.png') }}" alt="">Modifier le mot de passe</a>
+
+                <a href="#" class="action red supprimer-utilisateur" id="supprimer-utilisateur"
+                   data-utilisateur-login="{{ utilisateur.login }}">
+                    <img src="{{ asset('img/poubelle.png') }}" alt="">Supprimer le compte
+                </a>
+            </div>
+
+        {% endif %}
+
+        {% if is_granted('USER_DELETE', utilisateur) and app.user.code != utilisateur.code %}
+        <div class="actions">
+            <a href="#" class="action red supprimer-utilisateur" id="supprimer-utilisateur"
+               data-utilisateur-login="{{ utilisateur.login }}">
+                <img src="{{ asset('img/poubelle.png') }}" alt="">Supprimer le compte
+            </a>
+        </div>
+        {% endif %}
+
+    </div>
+
+
+{% endblock %}

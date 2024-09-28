@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}
+    Pages Vertes | Modifier le mot de passe
+{% endblock %}
+
+{% block cssSupplementaire %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/edition.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/formulaires.css') }}">
+{% endblock %}
+
+{% block page_content %}
+
+    <div class="onglet1">
+        <h1>Modifier mon mot de passe</h1>
+    </div>
+
+    <h2 class="path"><a href="{{ path('afficherProfil', {'code' : app.user.code}) }}">Mon profil</a> > Modifier mon
+        mot de passe</h2>
+
+    <div class="wrapTop">
+        <img class="illu" src="{{ asset('img/password.png') }}" alt="">
+
+        <div>
+            <h2>Modifiez votre <span class="greenText">mot de passe</span>, et sécurisez davantage votre compte
+            </h2>
+            <h4 class="light">Votre <span class="greenText">mot de passe</span> est ringard et ne vous plaît plus ?
+                <span class="greenText">Pas de soucis !</span> En quelques clics, modifiez votre mot de passe et
+                sécurisez votre compte en le protégeant des pirates !</h4>
+            <h4 class="light"><span class="greenText">Conseil :</span> n'hésitez pas à noter votre mot de passe sur un bout de papier
+                sur votre bureau, c'est le meilleur moyen de ne plus l'oublier ! </h4>
+        </div>
+    </div>
+
+    <br>
+    <h2>Modifier mon <span class="greenText">mot de passe</span></h2>
+
+    {{ form_start(form) }}
+
+    <div>
+        <div class="inputbox">
+            {{ form_widget(form.oldPassword, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            <label for="oldPassword">Ancien mot de passe</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p>Votre ancien mot de passe, utilisé actuellement</p>
+    </div>
+
+    <div>
+        <div class="inputbox">
+            {{ form_widget(form.newPassword, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            <label for="newPassword">Nouveau mot de passe</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p>Entre 8 et 30 caractères, au moins une minuscule, une majuscule et un nombre.</p>
+    </div>
+
+    <div class="wrapSubmit">
+        {{ form_row(form.enregistrer, {'attr' : {'class': 'submit'}}) }}
+    </div>
+
+    {{ form_end(form) }}
+{% endblock %}

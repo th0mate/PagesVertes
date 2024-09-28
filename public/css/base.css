@@ -44,6 +44,22 @@ nav {
     border-radius: 5px;
 }
 
+.path {
+    color: var(--vert);
+    text-decoration: none;
+    font-weight: 300;
+
+    a {
+        color: var(--vert);
+        text-decoration: none;
+        transition: all 0.5s ease-in-out;
+
+        &:hover {
+            border-bottom: 1px solid var(--vert);
+        }
+    }
+}
+
 
 /**
 ------------------------------------------------------------------------------------------------------------------------

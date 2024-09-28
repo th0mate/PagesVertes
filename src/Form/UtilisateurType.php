@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -28,12 +29,29 @@ class UtilisateurType extends AbstractType
                 'attr' => [
                     'minlength' => 4,
                     'maxlength' => 20
+                ],
+                'constraints' => [
+                    new Length([
+                        'min' => 4,
+                        'max' => 20,
+                        'minMessage' => 'Il faut au moins 4 caractères!',
+                        'maxMessage' => 'Il faut au plus 20 caractères!'
+                    ]),
+                    new NotBlank(['message' => 'Le login ne peut pas être vide']),
+                    new NotNull(['message' => 'Le login ne peut pas être null'])
                 ]])
+
             ->add('adresseEmail', EmailType::class, [
                 'attr' => [
                     'maxlength' => 255
+                ],
+                'constraints' => [
+                    new NotBlank(['message' => 'L\'adresse email ne peut pas être vide']),
+                    new NotNull(['message' => 'L\'adresse email ne peut pas être null']),
+                    new Email(['message' => 'L\'adresse mail n\'est pas valide'])
                 ]
             ])
+
             ->add('code', TextType::class, [
                 'attr' => [
                     'minlength' => 6,
@@ -41,15 +59,24 @@ class UtilisateurType extends AbstractType
                     'pattern' => '^[a-zA-Z0-9]+$'
                 ],
                 'constraints' => [
+                    new Length([
+                        'min' => 6,
+                        'max' => 6,
+                        'exactMessage' => 'Le code doit contenir exactement 6 caractères.'
+                    ]),
                     new Regex([
                         'pattern' => '/^[a-zA-Z0-9]+$/',
                         'message' => 'Le code ne doit contenir que des caractères alphanumériques.'
-                    ])
+                    ]),
+                    new NotBlank(['message' => 'Le code ne peut pas être vide']),
+                    new NotNull(['message' => 'Le code ne peut pas être null'])
                 ]])
+
             ->add('estVisible', CheckboxType::class, [
-                'attr' =>[
-                'checked' => 'checked'],
+                'attr' => [
+                    'checked' => 'checked'],
                 'required' => false])
+
             ->add('plainPassword', PasswordType::class, [
                 "mapped" => false,
                 "constraints" => [
@@ -68,6 +95,7 @@ class UtilisateurType extends AbstractType
                     'pattern' => '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,30}$',
 
                 ]])
+
             ->add('inscription', SubmitType::class);
     }
 

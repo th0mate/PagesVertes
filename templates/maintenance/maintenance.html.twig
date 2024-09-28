@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>Pages Vertes | Maintenance</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/maintenance.css') }}">
+    <link rel="icon" type="image/png" href="{{ asset('img/favicon.png') }}">
+</head>
+
+
+<body>
+
+<img src="{{ asset('img/logo-fondnoir.png') }}" class="logoMaintenance" alt="">
+<div class="maintenance">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <dotlottie-player src="https://lottie.host/daaf9f5c-0272-4b16-b145-c5e16f2555a0/UkEeal5fhO.json" background="transparent" speed="1" style="width: 250px; height: 250px;" loop autoplay></dotlottie-player>
+    <h2 class="greenText">Maintenance en cours</h2>
+    <h4><span class="greenText">Pages Vertes</span> est en cours de maintenance, revenez plus tard !</h4>
+</div>
+
+<div class="boutonAlert" onclick="window.history.back();">Revenir en arrière</div>
+
+</body>
