@@ -3,8 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
+use App\Service\DateServiceInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use JsonSerializable;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,7 +20,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[UniqueEntity(fields: ['adresseEmail'], message: 'Cette adresse email est déjà utilisée!')]
 #[UniqueEntity(fields: ['code'], message: 'Ce code est déjà utilisé!')]
 #[ORM\HasLifecycleCallbacks]
-class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
+class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface, JsonSerializable
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -41,8 +43,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column(length: 255)]
-    #[Assert\Length(min: 8, max: 30, minMessage: 'Il faut au moins 8 caractères!', maxMessage: 'Il faut au plus 30 caractères!')]
-    #[Assert\Regex(pattern:'#^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{8,30}$#')]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
@@ -52,7 +52,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $adresseEmail = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\Length(exactly: 6, exactMessage: 'Il faut au 6 caractères!')]
+    #[Assert\NotNull]
+    #[Assert\NotBlank]
+    #[Assert\Length(exactly: 6, exactMessage: 'Le code doit contenir exactement 6 caractères')]
     #[Assert\Regex(pattern:'#^[a-zA-Z0-9]+$#', message: 'Le code ne doit contenir que des caractères alphanumériques.')]
     private ?string $code = null;
 
@@ -67,9 +69,10 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(max: 255, maxMessage: 'Il faut au plus 255 caractères!')]
     private ?string $nom = null;
 
-    #[ORM\Column(nullable: true)]
-    #[Assert\Length(min: 10, max: 10, minMessage: 'Il faut 10 caractères!', maxMessage: 'Il faut 10 caractères!')]
-    private ?int $telephone = null;
+    #[ORM\Column(length: 10, nullable: true)]
+    #[Assert\Length(min: 10, max:  10, exactMessage: 'Il faut exactement 10 caractères pour un numéro de téléphone!')]
+    private ?string $telephone = null;
+
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(max: 255, maxMessage: 'Il faut au plus 255 caractères!')]
@@ -116,7 +119,6 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
@@ -152,8 +154,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+
     }
 
     public function getAdresseEmail(): ?string
@@ -197,7 +198,7 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->prenom;
     }
 
-    public function setPrenom(string $prenom): static
+    public function setPrenom(?string $prenom): static
     {
         $this->prenom = $prenom;
 
@@ -209,19 +210,19 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->nom;
     }
 
-    public function setNom(string $nom): static
+    public function setNom(?string $nom): static
     {
         $this->nom = $nom;
 
         return $this;
     }
 
-    public function getTelephone(): ?int
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(?int $telephone): static
+    public function setTelephone(?string $telephone): static
     {
         $this->telephone = $telephone;
 
@@ -266,7 +267,34 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\PrePersist]
     public function prePersistExempleChamp() : void {
-        $this->dateDerniereEdition = new \DateTime();
-        $this->dateDerniereConnexion = new \DateTime();
+
+        try
+        {
+            $parisTimezone = new \DateTimeZone('Europe/Paris');
+            $date = new \DateTime('now', $parisTimezone);
+        } catch (\Exception $e)
+        {
+            $date = new \DateTime();
+        }
+        $this->dateDerniereConnexion = $date;
+        $this->dateDerniereEdition = $date;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'login' => $this->getLogin(),
+            'roles' => $this->getRoles(),
+            'adresseEmail' => $this->getAdresseEmail(),
+            'code' => $this->getCode(),
+            'estVisible' => $this->isEstVisible(),
+            'prenom' => $this->getPrenom(),
+            'nom' => $this->getNom(),
+            'telephone' => $this->getTelephone(),
+            'facebook' => $this->getFacebook(),
+            'dateDerniereConnexion' => $this->getDateDerniereConnexion(),
+            'dateDerniereEdition' => $this->getDateDerniereEdition(),
+        ];
     }
 }

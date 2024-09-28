@@ -13,13 +13,12 @@ class UtilisateurManager implements UtilisateurManagerInterface
     public function __construct(
         private UserPasswordHasherInterface $userPasswordHasherInterface
     )
-    {
-    }
+    {}
 
     /**
      * Chiffre le mot de passe puis l'affecte au champ correspondant dans la classe de l'utilisateur
      */
-    private function chiffrerMotDePasse(Utilisateur $utilisateur, ?string $plainPassword): void
+    public function chiffrerMotDePasse(Utilisateur $utilisateur, ?string $plainPassword): void
     {
         $utilisateur->setPassword($this->userPasswordHasherInterface->hashPassword($utilisateur, $plainPassword));
     }

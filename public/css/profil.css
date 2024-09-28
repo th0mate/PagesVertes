@@ -1,0 +1,152 @@
+.wrapTop {
+    margin-bottom: 20px;
+
+    img {
+        width: auto!important;
+        height: 200px;
+    }
+}
+
+
+.profil {
+    width: 95%;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start;
+
+    .infos {
+        padding: 10px;
+        height: 100%;
+        border-radius: 10px;
+        border: 1px solid black;
+        display: flex;
+        width: 60%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: flex-start;
+
+        p {
+            position: relative;
+        }
+
+    }
+
+
+    .actions {
+        height: 100%;
+        max-width: 39%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        align-content: flex-start;
+
+        .action {
+            color: white;
+            text-decoration: none;
+            width: 98%;
+            padding: 10px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            background-color: var(--vert);
+
+            img {
+                width: 20px;
+                filter: invert(1);
+                padding-right: 15px;
+            }
+
+            &:hover {
+                background-color: #555555;
+            }
+        }
+
+        .red {
+            background-color: var(--rouge);
+        }
+
+    }
+
+}
+
+.copy {
+    margin-right: 15px;
+    max-width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--vert);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    img {
+        width: 20px;
+        filter: invert(1);
+    }
+
+    &:hover {
+        background-color: #555555;
+    }
+}
+
+
+/**
+------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------- DARK MODE -----------------------------------------------------------
+ */
+
+
+.dark {
+    .infos {
+        border: 1px solid white;
+    }
+}
+
+
+/**
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------- RESPONSIVE -----------------------------------------------------------
+ */
+
+
+@media (max-width: 1000px) {
+
+    .profil {
+        flex-direction: column;
+        align-items: center;
+        align-content: center;
+
+        .infos {
+            width: 95%;
+            margin-bottom: 30px;
+        }
+
+        .actions {
+            width: 95%;
+            max-width: 95%;
+
+            .action {
+                width: 100%;
+            }
+        }
+    }
+
+}

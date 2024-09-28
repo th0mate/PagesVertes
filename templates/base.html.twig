@@ -96,7 +96,7 @@
             </a>
 
             {% if is_granted('ROLE_USER') %}
-                <a class="element {% if page_actuelle == 'Profil' %} active {% endif %}">
+                <a href="{{ path('afficherProfil', {'code' : app.user.code}) }}" class="element {% if page_actuelle == 'Profil' %} active {% endif %}">
                     <img src="{{ asset('img/utilisateur.png') }}" alt="">
                     <p>Mon profil</p>
                 </a>

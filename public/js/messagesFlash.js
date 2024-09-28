@@ -62,6 +62,3 @@ function animateUp(element) {
         element.remove();
     }, 1000);
 }
-
-
-console.log('coucou');

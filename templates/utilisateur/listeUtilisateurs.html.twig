@@ -5,12 +5,22 @@
 {% endblock %}
 
 {% block cssSupplementaire %}
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/listeUtilisateurs.css') }}">{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/listeUtilisateurs.css') }}">
+{% endblock %}
+
+{% block jsSupplementaire %}
+    <script type="text/javascript" src="{{ asset('js/listeUtilisateur.js') }}" defer></script>
+{% endblock %}
+
 
 {% block page_content %}
     <div class="onglet1">
         <h1>Parcourir</h1>
     </div>
+
+    <script>
+        const imgDroite = "{{ asset('img/droite.png') }}";
+    </script>
 
     <div class="parcourirAccueil">
 
@@ -25,34 +35,21 @@
 
     </div>
 
+    {{ form_start(form, {'attr': {'class': 'recherche'}}) }}
+    <label for="recherche">Rechercher un <span class="greenText">utilisateur</span> :</label>
+    {{ form_widget(form.code) }}
 
-    {# TODO compléter l'action ! #}
-    <form class="recherche" action="" method="get">
-        <label for="recherche">Rechercher un <span class="greenText">utilisateur</span> :</label>
-        <input type="text" name="recherche" placeholder="Fz9oE7">
-        <button type="submit">Rechercher<img src="{{ asset('img/droite.png') }}" alt=""></button>
-    </form>
+    {{ form_widget(form.rechercher) }}
+
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
 
     <div class="gridListe">
 
         {% for utilisateur in utilisateursVisible %}
             {{ include('utilisateur/infosUtilisateurs.html.twig', {'utilisateur' : utilisateur}) }}
-
         {% else %}
             <p> Il n'y a aucun utilisateur </p>
-        {% endfor %}
-
-        {% for i in 0..10 %}
-
-            <a href="https://lien" class="utilisateur">
-                <h3 class="light greenText">Romain Touzé</h3>
-                <img class="estVisible invertLight" src="{{ asset('img/ferme.png') }}" alt="">
-                <div><img class="invertLight" src="{{ asset('img/telephone.png') }}" alt="">0687044071</div>
-                <div><img class="invertLight" src="{{ asset('img/mail.png') }}" alt="">romain.touze@etu.umontpellier.fr
-                </div>
-                <div><img class="invertLight" src="{{ asset('img/facebook.png') }}" alt="">@romaintouze</div>
-            </a>
-
         {% endfor %}
 
 

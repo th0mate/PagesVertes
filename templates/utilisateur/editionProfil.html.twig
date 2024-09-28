@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block page_title %}
+    Pages Vertes | Éditer le profil
+{% endblock %}
+
+{% block cssSupplementaire %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/edition.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/formulaires.css') }}">
+{% endblock %}
+
+{% block jsSupplementaire %}
+    <script type="text/javascript" src="{{ asset('js/codePersonnel.js') }}" defer></script>
+{% endblock %}
+
+
+{% block page_content %}
+    <div class="onglet1">
+        <h1>Éditer mon profil</h1>
+    </div>
+
+    <h2 class="path"><a href="{{ path('afficherProfil', {'code' : app.user.code}) }}">Mon profil</a> > Modifier mon profil</h2>
+
+    <div class="wrapTop">
+        <img class="illu" src="{{ asset('img/personnaliser.png') }}" alt="">
+
+        <div>
+            <h2>Personnalisez votre <span class="greenText">profil</span>, et augmentez votre visibilité !
+            </h2>
+            <h4 class="light"><span class="greenText">Modifiez</span> vos informations, votre mot de passe, votre code
+                et votre <span
+                        class="greenText">niveau de visibilité</span> en quelques clics.</h4>
+        </div>
+    </div>
+
+    <br>
+    <h2>Modifier mes <span class="greenText">informations</span></h2>
+
+    {{ form_start(form) }}
+
+    <div>
+        <div class="inputbox">
+            {{ form_widget(form.prenom, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            <label for="prenom">Prénom</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p>Votre prénom (facultatif)</p>
+    </div>
+
+    <div>
+        <div class="inputbox">
+            {{ form_widget(form.nom, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            <label for="nom">Nom</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p>Votre nom (facultatif)</p>
+    </div>
+
+    <div>
+        <div class="inputbox">
+            {{ form_widget(form.telephone, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            <label for="telephone">Téléphone</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p>Votre numéro de téléphone (facultatif)</p>
+    </div>
+
+    <div>
+        <div class="inputbox">
+            {{ form_widget(form.facebook, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            <label for="facebook">Facebook</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p>Votre pseudonyme Facebook (facultatif)</p>
+    </div>
+
+    <div>
+        <div class="inputbox">
+            {{ form_widget(form.adresseEmail, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            <label for="adresseEmail">Adresse Email</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+        </div>
+        <p>Votre adresse email valide</p>
+    </div>
+
+    <div>
+        <div class="inputbox randomBox">
+            {{ form_widget(form.code, {'attr': {'class': 'input', 'placeholder': ' '}}) }}
+            {# {{ form_label(formInscription.code) }} #}
+            <label for="code">Code personnel</label>
+            <img class="success" src="{{ asset('img/success.png') }}" alt="">
+            <img class="error" src="{{ asset('img/danger.png') }}" alt="">
+            <div class="bouton random" onclick="genererCodeAleatoire()"><img class="randomImage"
+                                                                             src="{{ asset('img/de.png') }}" alt="">Aléatoire
+            </div>
+        </div>
+        <p>Code unique de 6 caractères relié à votre compte.</p>
+    </div>
+
+    <div class="wrapSwitch">
+        <label for="estVisible">Visibilité publique du profil :</label>
+        {{ form_widget(form.estVisible, {'attr': {'class': 'switch'}}) }}
+    </div>
+
+    <div class="wrapSubmit">
+        {{ form_widget(form.modifier, {'attr' : {'class': 'submit'}}) }}
+    </div>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}
