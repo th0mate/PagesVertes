@@ -82,5 +82,5 @@ ATTENTION ! Si une erreur 500 est levée sur toutes les pages, faites comme suit
 - Puis tapez : ```sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX var```
 - Enfin : ```sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX var```
 
-Note : si les 'sudo' ne marchent pas, ne les mettez pas, cela fonctionnera tout de même.
+Note : si les 'sudo' ne marchent pas, ne les mettez pas, cela fonctionnera tout de même. Toutefois, si cela ne fonctionne toujours pas après avoir fait toutes ces commandes, modifiez le fichier .env et passer la variable APP_ENV=prod à APP_ENV=dev 
 
