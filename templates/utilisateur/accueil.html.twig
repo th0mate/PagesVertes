@@ -4,7 +4,8 @@
     Pages Vertes | Accueil
 {% endblock %}
 
-{% block cssSupplementaire %}<link rel="stylesheet" type="text/css" href="{{ asset('css/accueil.css') }}">{% endblock %}
+{% block cssSupplementaire %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/accueil.css') }}">{% endblock %}
 
 {% block page_content %}
     <div class="onglet1">
@@ -46,7 +47,9 @@
             <div>
                 <h3 class="light greenText">Fonctionnalités poussées</h3>
                 <p>Créez un compte pour rechercher d'autres utilisateurs !</p>
-                <a class="bouton" href="{{ path('inscription') }}">Créer un compte</a>
+                {% if not is_granted('ROLE_USER') %}
+                    <a class="bouton" href="{{ path('inscription') }}">Créer un compte</a>
+                {% endif %}
             </div>
         </div>
     </div>
